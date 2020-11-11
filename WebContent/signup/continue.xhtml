@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsf/core"
+	xmlns:e="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<h:head>
+	<title>Pelubosque y Carátulas</title>
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputStylesheet library="css" name="gmaps.css"/>
+	<h:outputScript library="js" name="bootstrap.js" />
+	<script src="https://kit.fontawesome.com/302a1eb3e6.js" />
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"/>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-N194VR_QIP5s_CMoAJs3mYhyQ6YVA4I&amp;callback=initAutocomplete&amp;libraries=places&amp;v=weekly"/>
+	<h:outputScript library="js" name="gmaps.js"/>
+</h:head>
+<header>
+	<nav class="navbar navbar-expand-lg bg-gradient-light">
+		<h3 class="d-flex justify-content-center" style="text-align: center;">Pelubosque y Carátulas</h3>
+	</nav>
+</header>
+<h:body>
+	<br />
+	<h1 style="text-align:center;">¡Hola #{nombre}!</h1>
+	<p style="text-align:center;">Antes de continuar, queremos hacerte unas preguntas</p>
+	<br />
+	<div class="container d-flex justify-content-center">
+	<h:form class="form">
+		<p:growl id="messages" showDetail="true" sticky="true"/>		
+		<p:panelGrid style="border:none;" columns="2" cellpadding="5" styleClass="ui-noborder">
+			<p:inputText id="autocomplete" pt:placeholder="Dirección" required="true" onfocus="geolocate()" validatorMessage="El nombre no puede estar vacio"/>
+			<p:selectCheckboxMenu id="preferredSede" value="#{server.locations}" label="Sede Preferida" multiple="false" style="width:170px">
+					<c:selectItems value="#{server.db.allLocations}"></c:selectItems>
+			</p:selectCheckboxMenu>
+			<p:commandButton value="Siguiente"></p:commandButton>
+		</p:panelGrid>
+	</h:form>
+	</div>
+	<br />
+</h:body>
+<footer class="bg-dark fixed-bottom">
+	<nav class="navbar navbar-expand-lg">
+		<p style="color: white; text-align: center;">©2020 Pelubosque - Todos los derechos reservados</p>
+		<ul class="navbar-nav ml-auto">
+			<li><i class="fab fa-cc-mastercard fa-2x px-1"
+				style="color: White;" /></li>
+			<li><i class="fab fa-cc-visa fa-2x px-1" style="color: White;" /></li>
+			<li><i class="fab fa-cc-amex fa-2x px-1" style="color: White;" /></li>
+			<li><i class="fas fa-money-bill-alt fa-2x px-1"
+				style="color: White;" /></li>
+		</ul>
+	</nav>
+</footer>
+</html>

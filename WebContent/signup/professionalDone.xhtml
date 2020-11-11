@@ -8,27 +8,39 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 <h:head>
+	<title>Pelubosque y Carátulas</title>
 	<h:outputStylesheet library="css" name="bootstrap.css" />
 	<h:outputScript library="js" name="bootstrap.js" />
 	<script src="https://kit.fontawesome.com/302a1eb3e6.js" />
 </h:head>
 <header>
 	<nav class="navbar navbar-expand-lg bg-gradient-light">
-		<button class="navbar-toggler pull-left" type="button"
-			data-toggle="collapse" data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<i class="fas fa-bars" />
-		</button>
-		<h3 class="d-flex justify-content-center" style="text-align: center;">Pelubosque & Carátulas</h3>
+		<h3 class="d-flex justify-content-center" style="text-align: center;">Pelubosque
+			y Carátulas</h3>
 	</nav>
 </header>
 <h:body>
+	<br />
+	<h1 style="text-align: center;">Crear una cuenta</h1>
+	<br />
+	<div class="container d-flex justify-content-center">
+		<p:panelGrid columns="1" styleClass="ui-noborder">
+			<div class="card-img-top d-flex justify-content-center">
+				<i class="fas fa-check-circle fa-8x" style="color: Green" />
+			</div>
+			<h2 style="text-align: center;">¡Gracias #{nombre}!</h2>
+			<p style="text-align: center;">Terminaste de manera satisfactoria tu registro. Una vez verifiquemos que todo está en orden añadiremos las funciones correspondientes a tu cuenta. Por ahora puedes ingresar como un usuario normal.</p>
+			<div class="d-flex justify-content-end">
+				<p:commandButton value="Haz click aquí para acceder a tu cuenta" />
+			</div>
+		</p:panelGrid>
+	</div>
+	<br />
 </h:body>
-<footer class="bg-dark">
+<footer class="bg-dark fixed-bottom">
 	<nav class="navbar navbar-expand-lg">
-		<p style="color: white; text-align: center;">©2020 Pelubosque - Todos los derechos
-			reservados</p>
+		<p style="color: white; text-align: center;">©2020 Pelubosque -
+			Todos los derechos reservados</p>
 		<ul class="navbar-nav ml-auto">
 			<li><i class="fab fa-cc-mastercard fa-2x px-1"
 				style="color: White;" /></li>
