@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsf/core"
+	xmlns:e="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<h:head>
+	<title>Pelubosque y Carátulas</title>
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputScript library="js" name="bootstrap.js" />
+	<script src="https://kit.fontawesome.com/302a1eb3e6.js" />
+</h:head>
+<header>
+	<nav class="navbar navbar-expand-lg bg-gradient-light">
+		<h3 class="d-flex justify-content-center" style="text-align: center;">Pelubosque y Carátulas</h3>
+	</nav>
+</header>
+<h:body>
+	<br />
+	<h1 style="text-align:center;">Iniciar Sesion</h1>
+	<p class="text-muted" style="text-align:center;">Portal de Administración</p>
+	<br />
+	<div class="container d-flex justify-content-center">
+	<h:form class="form">
+		<p:growl id="messages" showDetail="true" sticky="true"/>		
+		<p:panelGrid style="border:none;" columns="1" cellpadding="5">
+			<p:inputText pt:placeholder="Usuario" required="true" validatorMessage="El usuario no puede estar vacío"/>
+			<p:password pt:placeholder="Contraseña" required="true" validatorMessage="Todo usuario debe tener contraseña"/>
+			<p:commandButton value="Iniciar Sesion" update="messages"/>
+		</p:panelGrid>	
+	</h:form>
+	</div>
+	<br />
+</h:body>
+<footer class="bg-dark fixed-bottom">
+	<nav class="navbar navbar-expand-lg">
+		<p style="color: white; text-align: center;">©2020 Pelubosque - Todos los derechos reservados</p>
+		<ul class="navbar-nav ml-auto">
+			<li><i class="fab fa-cc-mastercard fa-2x px-1"
+				style="color: White;" /></li>
+			<li><i class="fab fa-cc-visa fa-2x px-1" style="color: White;" /></li>
+			<li><i class="fab fa-cc-amex fa-2x px-1" style="color: White;" /></li>
+			<li><i class="fas fa-money-bill-alt fa-2x px-1"
+				style="color: White;" /></li>
+		</ul>
+	</nav>
+</footer>
+</html>
