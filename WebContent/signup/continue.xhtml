@@ -31,7 +31,7 @@
 	<h:form class="form">
 		<p:growl id="messages" showDetail="true" sticky="true"/>		
 		<p:panelGrid style="border:none;" columns="2" cellpadding="5" styleClass="ui-noborder">
-			<p:inputText id="autocomplete" pt:placeholder="Dirección" required="true" onfocus="geolocate()" validatorMessage="El nombre no puede estar vacio"/>
+			<p:inputText id="autocomplete" autocomplete="true" pt:placeholder="Dirección" required="true" onfocus="geolocate()" validatorMessage="El nombre no puede estar vacio"/>
 			<p:selectCheckboxMenu id="preferredSede" value="#{server.locations}" label="Sede Preferida" multiple="false" style="width:170px">
 					<c:selectItems value="#{server.db.allLocations}"></c:selectItems>
 			</p:selectCheckboxMenu>

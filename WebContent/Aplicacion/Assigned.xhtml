@@ -16,7 +16,7 @@
 	<nav class="navbar navbar-expand-lg bg-gradient-light">
 		<div class="navbar-nav mr-auto">
 		<a onclick="PF('sidebarOperations').show()"><i class="fas fa-bars"/></a>
-		<h3 class="d-flex justify-content-center" style="text-align: center; color: Black;"><a>Pelubosque y Carátulas</a></h3>
+		<h3 class="d-flex justify-content-center" style="text-align: center;"><a>Pelubosque y Carátulas</a></h3>
 		</div>
 		<div class="navbar-nav ml-auto">
 		<h3 style="text-align: center;"><a onclick="PF('sidebarOperations').show()"><i class="fas fa-user-circle fa-3x"/></a></h3>
@@ -30,30 +30,38 @@
 		<h3 style="text-align: center;">#{nombreUsuario}</h3>
 		<p style="text-align: center;" class="text-muted">¿Qué quieres hacer hoy?</p>
 		<br />
-		<p:panelGrid columns="1" styleClass="ui-noborder" id="userPanel" rendered="true">
+		<p:panelGrid columns="1" styleClass="ui-noborder" id="userPanel" rendered="false">
 			<p><a><i class="fas fa-user-edit"/> Mi Cuenta</a></p>
-			<p><a><i class="fas fa-store"/> Puntos</a></p>
-			<p><a><i class="fas fa-file-contract"/> Solicitudes Pendientes</a></p>
-			<p><a><i class="fas fa-chart-line"/> Estadísticas</a></p>
-			<p><a><i class="fas fa-users"/> Clientes</a></p>
+			<p><a><i class="fas fa-credit-card"/> Mis Medios de Pago</a></p>
+			<p><a><i class="fas fa-calendar-alt"/> Mis Citas</a></p>
+			<p><a><i class="fas fa-door-open"/> Cerrar Sesion</a></p>
+		</p:panelGrid>
+		<p:panelGrid columns="1" styleClass="ui-noborder" id="professionalPanel" rendered="false">
+			<p><a><i class="fas fa-user-edit"/> Mi Cuenta</a></p>
+			<p><a><i class="fas fa-credit-card"/> Mis Medios de Pago</a></p>
+			<p><a><i class="fas fa-calendar-alt"/> Mis Citas</a></p>
+			<p><a><i class="fas fa-users"/> Mis Clientes</a></p>
+			<p><a><i class="fas fa-calendar-check"/> Mis Citas Asignadas</a></p>
+			<p><a><i class="fas fa-piggy-bank"/> Mis Recaudos</a></p>
 			<p><a><i class="fas fa-door-open"/> Cerrar Sesion</a></p>
 		</p:panelGrid>
 	</p:sidebar>
 	<div class="container d-flex justify-content-center">
-		<p:panelGrid columns="3" styleClass="ui-noborder">
-			<p:commandButton icon="fas fa-file-download" value=" Descargar Reporte"/>
-			<p:commandButton icon="fas fa-file-contract" value="Solicitudes"/>
-			<p:commandButton icon="fas fa-users" value=". Clientes"/>
+		<p:panelGrid columns="2" styleClass="ui-noborder">
+			<p:commandButton icon="fas fa-pencil-alt" value="Crear Cita"/>
+			<p:commandButton icon="fas fa-coins" value="Ver Pagos Pendientes"/>
 		</p:panelGrid>
 	</div>
 	<div class="container">
 		<br />
-		<h1>Puntos</h1>
+		<h1>Mis Citas Asignadas</h1>
 		<p:dataTable var="appointments" value="server.db.getuserappointments">
-			<p:column headerText="Sede"></p:column>
-			<p:column headerText="Ubicación"></p:column>
-			<p:column headerText="Aforo"></p:column>
-			<p:column headerText="Detalle"></p:column>
+			<p:column headerText="Selección"></p:column>
+			<p:column headerText="Fecha"></p:column>
+			<p:column headerText="Profesional"></p:column>
+			<p:column headerText="Valor"></p:column>
+			<p:column headerText="Lugar"></p:column>
+			<p:column headerText="Operaciones"></p:column>
 		</p:dataTable>
 	</div>
 	<br />

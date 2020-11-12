@@ -15,7 +15,7 @@
 </h:head>
 <header>
 	<nav class="navbar navbar-expand-lg bg-gradient-light">
-		<h3 class="d-flex justify-content-center" style="text-align: center;">Pelubosque y Carátulas</h3>
+		<h3 class="d-flex justify-content-center" style="text-align: center;"><a href="/PelubosqueCaratulas/" style="color: Black;">Pelubosque y Carátulas</a></h3>
 	</nav>
 </header>
 <h:body>
@@ -26,7 +26,7 @@
 	<div class="container d-flex justify-content-center">
 	<h:form class="form">
 		<p:growl id="messages" showDetail="true" sticky="true"/>		
-		<p:panelGrid style="border:none;" columns="1" cellpadding="5">
+		<p:panelGrid style="border:none;" columns="1" cellpadding="5" styleClass="ui-noborder">
 			<p:inputText pt:placeholder="Usuario" required="true" validatorMessage="El usuario no puede estar vacío"/>
 			<p:password pt:placeholder="Contraseña" required="true" validatorMessage="Todo usuario debe tener contraseña"/>
 			<p:commandButton value="Iniciar Sesion" update="messages"/>

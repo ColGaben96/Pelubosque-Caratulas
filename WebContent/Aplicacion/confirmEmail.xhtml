@@ -23,17 +23,12 @@
 	<h1 style="text-align:center;">Iniciar Sesion</h1>
 	<br />
 	<div class="container d-flex justify-content-center">
-	<h:form class="form-group">
+	<h:form class="form-group" id="confirmed" rendered="true">
 		<p:growl id="messages" showDetail="true" sticky="true"/>		
 		<p:panelGrid columns="1" cellpadding="5" styleClass="ui-noborder">
-			<p:inputText pt:placeholder="Usuario" required="true" validatorMessage="El usuario no puede estar vacío"/>
-			<p:password pt:placeholder="Contraseña" required="true" validatorMessage="Todo usuario debe tener contraseña"/>
-			<p:selectBooleanCheckbox itemLabel="Recordarme"/>
-			<p:link href="forgotPassword.xhtml">¿Olvidaste tu contraseña?</p:link>
-		</p:panelGrid>
-		<p:panelGrid columns="2" cellpadding="5" styleClass="ui-noborder">
-			<p:linkButton value="Registrarse" href="../signup/page1.xhtml"/>
-			<p:commandButton value="Iniciar Sesion" update="messages"/>
+			<h1 style="text-align: center;"><i class="fas fa-check-circle fa-5x" style="color: Green;"/></h1>
+			<p>¡Listo! Estamos gestionando tu contraseña. Si tu cuenta está asociada al correo proporcionado este llegará de 3 a 5 minutos.</p>
+			<p:linkButton value="Volver al Inicio" update="messages" href="../index.xhtml"/>
 		</p:panelGrid>
 	</h:form>
 	</div>
