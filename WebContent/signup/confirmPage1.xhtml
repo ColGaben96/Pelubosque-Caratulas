@@ -27,7 +27,8 @@
 			<div class="container d-flex justify-content-center">
 				<i class="fas fa-paper-plane fa-8x"/>
 			</div>
-				<h2>Te hemos enviado un correo a #{correo}.</h2>
+				<c:attribute name="correo" value="#{user.email}"/>
+				<h2>Te hemos enviado un correo a <b>#{correo}</b>.</h2>
 				<p>Verifica este correo electrónico para poder continuar.</p>
 		</p:panelGrid>
 	</div>

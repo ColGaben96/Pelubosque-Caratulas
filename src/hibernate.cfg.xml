@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<hibernate-configuration>
+	<session-factory>
+		<!-- JDBC Database connection settings -->
+		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://remotemysql.com:3306/ImmnUr2vPP</property>
+		<property name="connection.username">ImmnUr2vPP</property>
+		<property name="connection.password">MLSgcm7woJ</property>
+		<!-- Select our SQL dialect -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+		<!-- Echo the SQL to stdout -->
+		<property name="show_sql">true</property>
+		<!-- Set the current session context -->
+		<property name="current_session_context_class">thread</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<!-- Set mapping of user -->
+		<mapping class="co.edu.unbosque.model.User"/>
+
+	</session-factory>
+</hibernate-configuration>

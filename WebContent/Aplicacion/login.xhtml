@@ -26,14 +26,14 @@
 	<h:form class="form-group">
 		<p:growl id="messages" showDetail="true" sticky="true"/>		
 		<p:panelGrid columns="1" cellpadding="5" styleClass="ui-noborder">
-			<p:inputText pt:placeholder="Usuario" required="true" validatorMessage="El usuario no puede estar vacío"/>
-			<p:password pt:placeholder="Contraseña" required="true" validatorMessage="Todo usuario debe tener contraseña"/>
+			<p:inputText id="username" pt:placeholder="Usuario" required="true" value="#{user.username}" validatorMessage="El usuario no puede estar vacío"/>
+			<p:password id="password" pt:placeholder="Contraseña" required="true" value="#{user.password}" validatorMessage="Todo usuario debe tener contraseña"/>
 			<p:selectBooleanCheckbox itemLabel="Recordarme"/>
 			<p:link href="forgotPassword.xhtml">¿Olvidaste tu contraseña?</p:link>
 		</p:panelGrid>
 		<p:panelGrid columns="2" cellpadding="5" styleClass="ui-noborder">
 			<p:linkButton value="Registrarse" href="../signup/page1.xhtml"/>
-			<p:commandButton value="Iniciar Sesion" update="messages"/>
+			<p:commandButton value="Iniciar Sesion" update="messages" action="#{user.checkUser()}"/>
 		</p:panelGrid>
 	</h:form>
 	</div>

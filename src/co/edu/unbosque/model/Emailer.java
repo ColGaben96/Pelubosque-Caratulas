@@ -10,7 +10,6 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
 /**
  *  * @author Gabriel Blanco
  * @version 1.0
@@ -29,6 +28,7 @@ public class Emailer {
 	 * @return
 	 */
 	public Session getSessionObject() {
+		System.out.println("Getting Properties");
 		Properties props=new Properties();  
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.starttls.enable", "true");
@@ -46,12 +46,14 @@ public class Emailer {
 	
 	public void sendEmail(String emailTO, String subject, Object htmlContent) throws AddressException, MessagingException {
 		MimeMessage message=new MimeMessage(getSessionObject());
-		message.setFrom(new InternetAddress("no-reply@pelubosque.com"));
+		message.setFrom(new InternetAddress("Pelubosque"));
+		System.out.println("Wait");
 		message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailTO));
 		message.setSubject(subject);
 		message.setContent(
 	              htmlContent,
 	             "text/html");
 		Transport.send(message);
+		System.out.println("Message sent");
 	}
 }

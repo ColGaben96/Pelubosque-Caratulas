@@ -27,9 +27,9 @@
 	<h:form class="form">
 		<p:growl id="messages" showDetail="true" sticky="true"/>		
 		<p:panelGrid style="border:none;" columns="1" cellpadding="5" styleClass="ui-noborder">
-			<p:inputText pt:placeholder="Usuario" required="true" validatorMessage="El usuario no puede estar vacío"/>
-			<p:password pt:placeholder="Contraseña" required="true" validatorMessage="Todo usuario debe tener contraseña"/>
-			<p:commandButton value="Iniciar Sesion" update="messages"/>
+			<p:inputText id="username" pt:placeholder="Usuario" required="true" value="#{user.username}" validatorMessage="El usuario no puede estar vacío"/>
+			<p:password id="password" pt:placeholder="Contraseña" required="true" value="#{user.password}" validatorMessage="Todo usuario debe tener contraseña"/>
+			<p:commandButton value="Iniciar Sesion" update="messages" action="#{user.checkAdmin()}"/>
 		</p:panelGrid>	
 	</h:form>
 	</div>
