@@ -14,6 +14,8 @@
 		<!-- Set the current session context -->
 		<property name="current_session_context_class">thread</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
+		<!-- Set mapping of user -->
+		<mapping class="co.edu.unbosque.model.User"/>
 
 	</session-factory>
 </hibernate-configuration>

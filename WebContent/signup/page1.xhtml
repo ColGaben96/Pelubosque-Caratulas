@@ -23,24 +23,29 @@
 	<h1 style="text-align:center;">Crear una cuenta</h1>
 	<br />
 	<div class="container d-flex justify-content-center">
-	<h:form class="form">
-		<p:growl id="messages" showDetail="true" sticky="true"/>		
+	<h:form class="form">		
+	<p:growl id="messages" showDetail="true" sticky="false"/>
 		<p:panelGrid style="border:none;" columns="2" cellpadding="5" styleClass="ui-noborder">
-			<p:inputText pt:placeholder="Nombre" required="true" validatorMessage="El nombre no puede estar vacio"/>
-			<p:inputText pt:placeholder="Teléfono" required="true" validatorMessage="Todo usuario debe tener contraseña"/>
-			<p:selectOneMenu required="true" validatorMessage="Debes seleccionar un tipo de identificación">
-				<c:selectItem itemLabel="Seleccionar"/>
-				<c:selectItems value="#{server.db.getIDS}"/>
+			<p:inputText pt:placeholder="Nombre" required="true" value="#{user.name}" requiredMessage="El nombre no puede estar vacio"/>
+			<p:selectOneMenu required="true" value="#{user.genre}" requiredMessage="El género es requerido">
+				<c:selectItem itemLabel="Género"/>
+				<c:selectItems value="#{server.db.getGENRES()}"/>
 			</p:selectOneMenu>
-			<p:inputText pt:placeholder="Numero" required="true" validatorMessage="Todo número de id tiene contraseña"/>
-			<p:inputText pt:placeholder="Correo" required="true" validatorMessage="Todo usuario debe tener contraseña"/>
-			<p:inputText pt:placeholder="Nombre de Usuario" required="true" validatorMessage="Todo usuario debe tener contraseña"/>
-			<p:password id="pwd1" pt:placeholder="Contraseña" required="true" feedback="true" maxlength="8">
+			<p:datePicker pt:placeholder="Fecha de Nacimiento" pattern="dd/MM/yyyy" selectionMode="range" yearRange="1900:2100" yearNavigator="true" monthNavigator="true" value="#{user.birthday}"/>
+			<p:inputText pt:placeholder="Teléfono" required="true" value="#{user.phone}" requiredMessage="El teléfono no puede estar vacio"/>
+			<p:selectOneMenu required="true" value="#{user.toid}" requiredMessage="Debes seleccionar un tipo de identificación">
+				<c:selectItem itemLabel="Tipo de Identificación"/>
+				<c:selectItems value="#{server.db.getIDS()}"/>
+			</p:selectOneMenu>
+			<p:inputText pt:placeholder="Numero" value="#{user.noid}" required="true" requiredMessage="El número no puede estar vacio"/>
+			<p:inputText pt:placeholder="Correo" required="true" value="#{user.email}" requiredMessage="El correo no puede estar facio"/>
+			<p:inputText pt:placeholder="Nombre de Usuario" required="true" value="#{user.username}" requiredMessage="El usuario no debe estar vacio"/>
+			<p:password id="pwd1" pt:placeholder="Contraseña" required="true" value="#{user.password}" feedback="true" maxlength="8" match="pwd2" requiredMessage="La contraseña no puede ser vacia" validatorMessage="La contraseña debe tener mínimo 5 caracteres" weakLabel="Débil" goodLabel="Buena" strongLabel="Adecuada" promptLabel="Ingresa una contraseña">
 				<c:validateLength minimum="5"></c:validateLength>
 			</p:password>
-			<p:password id="pwd2" match="pwd1" pt:placeholder="Confirmar Contraseña" maxlength="8" feedback="true" required="true"/>
+			<p:password id="pwd2" pt:placeholder="Confirmar Contraseña" maxlength="8" feedback="true" required="true" requiredMessage="La contraseña no puede ser vacia" validatorMessage="Las contraseñas deben ser iguales" weakLabel="Débil" goodLabel="Buena" strongLabel="Adecuada" promptLabel="Ingresa una contraseña"/>
 			<p:selectBooleanCheckbox itemLabel="Acepto los términos y condiciones" required="true" validatorMessage="Debes aceptar"/>
-			<p:commandButton value="Registrarse" update="messages"/>
+			<p:commandButton value="Registrarse" update="messages" action="#{user.createUser()}"/>
 		</p:panelGrid>
 	</h:form>
 	</div>
