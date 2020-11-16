@@ -23,19 +23,24 @@
 	</nav>
 </header>
 <h:body>
+	<c:metadata>
+		<c:viewParam name="sessionID" value="#{user.sessionID}"></c:viewParam>
+	</c:metadata>
+	<p>#{user.validateSessionID()}</p>
 	<br />
-	<h1 style="text-align:center;">¡Hola #{nombre}!</h1>
+	<c:attribute name="username" value="#{user.name}"/>
+	<h1 style="text-align:center;">¡Hola #{username}!</h1>
 	<p style="text-align:center;">Antes de continuar, queremos hacerte unas preguntas</p>
 	<br />
 	<div class="container d-flex justify-content-center">
 	<h:form class="form">
 		<p:growl id="messages" showDetail="true" sticky="true"/>		
 		<p:panelGrid style="border:none;" columns="2" cellpadding="5" styleClass="ui-noborder">
-			<p:inputText id="autocomplete" autocomplete="true" pt:placeholder="Dirección" required="true" onfocus="geolocate()" validatorMessage="El nombre no puede estar vacio"/>
-			<p:selectCheckboxMenu id="preferredSede" value="#{server.locations}" label="Sede Preferida" multiple="false" style="width:170px">
-					<c:selectItems value="#{server.db.allLocations}"></c:selectItems>
+			<p:inputText id="autocomplete" value="#{user.address}" autocomplete="true" pt:placeholder="Dirección" required="true" onfocus="geolocate()" validatorMessage="El nombre no puede estar vacio"/>
+			<p:selectCheckboxMenu id="preferredSede" pt:placeholder="Sedes Preferidas" label="Sede Preferida" multiple="false" style="width:170px">
+					<c:selectItems value="#{server.db.getLOCATIONS()}"/>
 			</p:selectCheckboxMenu>
-			<p:commandButton value="Siguiente"></p:commandButton>
+			<p:commandButton value="Siguiente" action="#{user.newUserUploadAddress()}"></p:commandButton>
 		</p:panelGrid>
 	</h:form>
 	</div>

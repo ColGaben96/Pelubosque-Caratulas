@@ -20,6 +20,10 @@
 	</nav>
 </header>
 <h:body>
+	<c:metadata>
+		<c:viewParam name="sessionID" value="#{user.sessionID}"></c:viewParam>
+	</c:metadata>
+	<p>#{user.validateSessionID()}</p>
 	<br />
 	<h1 style="text-align: center;">Crear una cuenta</h1>
 	<br />
@@ -28,11 +32,10 @@
 			<div class="card-img-top d-flex justify-content-center">
 				<i class="fas fa-check-circle fa-8x" style="color: Green" />
 			</div>
-			<h2 style="text-align: center;">¡Gracias #{nombre}!</h2>
-			<p style="text-align: center;">Terminaste de manera satisfactoria
-				tu registro.</p>
+			<h2 style="text-align: center;">¡Gracias #{username}!</h2>
+			<p style="text-align: center;">Terminaste de manera satisfactoria tu registro.</p>
 			<div class="d-flex justify-content-end">
-				<p:commandButton value="Haz click aquí para acceder a tu cuenta" />
+				<p:linkButton value="Haz click aquí para acceder a tu cuenta" href="index.xhtml?sessionID=#{user.sessionID}"/>
 			</div>
 
 		</p:panelGrid>

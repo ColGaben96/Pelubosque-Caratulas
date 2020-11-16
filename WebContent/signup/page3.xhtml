@@ -23,8 +23,13 @@
 	</nav>
 </header>
 <h:body>
+	<c:metadata>
+		<c:viewParam name="sessionID" value="#{user.sessionID}"></c:viewParam>
+	</c:metadata>
+	<p>#{user.validateSessionID()}</p>
 	<br />
-	<h1 style="text-align:center;">¡Hola #{nombre}!</h1>
+	<c:attribute name="username" value="#{user.name}"/>
+	<h1 style="text-align:center;">¡Hola #{username}!</h1>
 	<p style="text-align:center;">Antes de continuar, queremos hacerte unas preguntas</p>
 	<br />
 	<div class="container d-flex justify-content-center">
@@ -32,8 +37,8 @@
 		<p:growl id="messages" showDetail="true" sticky="true"/>	
 		<h1>¿Si eres profesional en belleza, quieres trabajar con nosotros?</h1>	
 		<p:panelGrid style="border:none;" columns="2" cellpadding="5" styleClass="ui-noborder">
-			<p:commandButton value="No"></p:commandButton>
-			<p:commandButton value="Si"></p:commandButton>
+			<p:linkButton value="No" href="finishUser.xhtml?sessionID=#{user.sessionID}"/>
+			<p:linkButton value="Si"/>
 		</p:panelGrid>
 	</h:form>
 	</div>

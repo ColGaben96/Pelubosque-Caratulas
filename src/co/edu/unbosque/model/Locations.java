@@ -1,11 +1,18 @@
 package co.edu.unbosque.model;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 @ManagedBean(name="locations")
 @Entity
@@ -55,6 +62,22 @@ public class Locations {
 		this.maxCapacity = maxCapacity;
 	}
 	
-	
+	public void createLocation() {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cargando...",null);
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpSession facesSession = (HttpSession) context.getExternalContext().getSession(true);
+		context.addMessage("messages", message);
+		String sessionID = context.getExternalContext().getSessionId(true);
+		SessionFactory factory = new Configuration()
+				.configure()
+				.addAnnotatedClass(Locations.class)
+				.buildSessionFactory();
+		Session session = factory.getCurrentSession();
+		var newLocation = new Locations(name, address, 0, maxCapacity);
+		session.beginTransaction();
+		session.save(newLocation);
+		session.getTransaction().commit();
+		session.close();
+	}
 	
 }

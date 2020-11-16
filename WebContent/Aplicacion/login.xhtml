@@ -24,10 +24,10 @@
 	<br />
 	<div class="container d-flex justify-content-center">
 	<h:form class="form-group">
-		<p:growl id="messages" showDetail="true" sticky="true"/>		
+		<p:growl id="messages" showDetail="false" sticky="true"/>		
 		<p:panelGrid columns="1" cellpadding="5" styleClass="ui-noborder">
-			<p:inputText id="username" pt:placeholder="Usuario" required="true" value="#{user.username}" validatorMessage="El usuario no puede estar vacío"/>
-			<p:password id="password" pt:placeholder="Contraseña" required="true" value="#{user.password}" validatorMessage="Todo usuario debe tener contraseña"/>
+			<p:inputText id="username" pt:placeholder="Usuario" required="true" value="#{user.username}" requiredMessage="El usuario no puede estar vacío"/>
+			<p:password id="password" pt:placeholder="Contraseña" required="true" value="#{user.password}" requiredMessage="Todo usuario debe tener contraseña"/>
 			<p:selectBooleanCheckbox itemLabel="Recordarme"/>
 			<p:link href="forgotPassword.xhtml">¿Olvidaste tu contraseña?</p:link>
 		</p:panelGrid>
