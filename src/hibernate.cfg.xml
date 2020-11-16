@@ -16,6 +16,7 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<!-- Set mapping of user -->
 		<mapping class="co.edu.unbosque.model.User"/>
+		<mapping class="co.edu.unbosque.model.Locations"/>
 
 	</session-factory>
 </hibernate-configuration>

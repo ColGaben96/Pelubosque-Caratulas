@@ -24,26 +24,34 @@
 	</nav>
 </header>
 <h:body>
+	<c:metadata>
+		<c:viewParam name="sessionID" value="#{user.sessionID}"></c:viewParam>
+	</c:metadata>
+	<p>#{user.validateSessionID()}</p>
+	<p>#{user.checkPermissions()}</p>
+	<c:attribute name="userRole" value="#{user.checkPermissions()}"/>
+	<c:attribute name="professionalRole" value="#{user.checkPermissions()}"/>
 	<p:sidebar widgetVar="sidebarOperations" baseZIndex="10000">
 		<br />
 		<h1 style="text-align: center;"><i class="fas fa-user-circle fa-3x"/></h1>
-		<h3 style="text-align: center;">#{nombreUsuario}</h3>
+		<c:attribute name="username" value="#{user.name}"/>
+		<h3 style="text-align: center;">#{username}</h3>
 		<p style="text-align: center;" class="text-muted">¿Qué quieres hacer hoy?</p>
 		<br />
-		<p:panelGrid columns="1" styleClass="ui-noborder" id="userPanel">
-			<p><a><i class="fas fa-user-edit"/> Mi Cuenta</a></p>
-			<p><a><i class="fas fa-credit-card"/> Mis Medios de Pago</a></p>
-			<p><a><i class="fas fa-calendar-alt"/> Mis Citas</a></p>
-			<p><a><i class="fas fa-door-open"/> Cerrar Sesion</a></p>
+		<p:panelGrid columns="1" styleClass="ui-noborder" id="userPanel" rendered="#{userRole}">
+			<p><a href="Account.xhtml" style="color: Black;"><i class="fas fa-user-edit"/> Mi Cuenta</a></p>
+			<p><a href="Payments.xhtml" style="color: Black;"><i class="fas fa-credit-card"/> Mis Medios de Pago</a></p>
+			<p><a href="Appointments.xhtml" style="color: Black;"><i class="fas fa-calendar-alt"/> Mis Citas</a></p>
+			<p><a href="../index.xhtml" style="color: Black;"><i class="fas fa-door-open"/> Cerrar Sesion</a></p>
 		</p:panelGrid>
-		<p:panelGrid columns="1" styleClass="ui-noborder" id="professionalPanel">
-			<p><a><i class="fas fa-user-edit"/> Mi Cuenta</a></p>
-			<p><a><i class="fas fa-credit-card"/> Mis Medios de Pago</a></p>
-			<p><a><i class="fas fa-calendar-alt"/> Mis Citas</a></p>
-			<p><a><i class="fas fa-users"/> Mis Clientes</a></p>
-			<p><a><i class="fas fa-calendar-check"/> Mis Citas Asignadas</a></p>
-			<p><a><i class="fas fa-piggy-bank"/> Mis Recaudos</a></p>
-			<p><a><i class="fas fa-door-open"/> Cerrar Sesion</a></p>
+		<p:panelGrid columns="1" styleClass="ui-noborder" id="professionalPanel" rendered="#{professionalRole}">
+			<p><a href="Account.xhtml" style="color: Black;"><i class="fas fa-user-edit"/> Mi Cuenta</a></p>
+			<p><a href="Payments.xhtml" style="color: Black;"><i class="fas fa-credit-card"/> Mis Medios de Pago</a></p>
+			<p><a href="Appointments.xhtml" style="color: Black;"><i class="fas fa-calendar-alt"/> Mis Citas</a></p>
+			<p><a href="Clients.xhtml" style="color: Black;"><i class="fas fa-users"/> Mis Clientes</a></p>
+			<p><a href="Assigned.xhtml" style="color: Black;"><i class="fas fa-calendar-check"/> Mis Citas Asignadas</a></p>
+			<p><a href="PaymentCollection.xhtml" style="color: Black;"><i class="fas fa-piggy-bank"/> Mis Recaudos</a></p>
+			<p><a href="../index.xhtml" style="color: Black;"><i class="fas fa-door-open"/> Cerrar Sesion</a></p>
 		</p:panelGrid>
 	</p:sidebar>
 	<div class="container d-flex justify-content-center">

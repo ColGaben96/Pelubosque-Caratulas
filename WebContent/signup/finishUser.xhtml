@@ -23,16 +23,21 @@
 	</nav>
 </header>
 <h:body>
+	<c:metadata>
+		<c:viewParam name="sessionID" value="#{user.sessionID}"></c:viewParam>
+	</c:metadata>
+	<p>#{user.validateSessionID()}</p>
 	<br />
-	<h1 style="text-align:center;">¡Gracias #{nombre}!</h1>
+	<br />
+	<h1 style="text-align:center;">¡Gracias #{username}!</h1>
 	<p style="text-align:center;">Sabemos que es tedioso, pero ¿Quieres inscribir tu tarjeta de crédito para pagar mas rápido?</p>
 	<br />
 	<div class="container d-flex justify-content-center">
 	<h:form class="form">
 		<p:growl id="messages" showDetail="true" sticky="true"/>
 		<p:panelGrid columns="2" cellpadding="5" styleClass="ui-noborder">
-			<p:commandButton value="No"></p:commandButton>
-			<p:commandButton value="Si"></p:commandButton>
+			<p:linkButton value="No" href="userDone.xhtml?sessionID=#{user.sessionID}"/>
+			<p:linkButton value="Si" href="userCreditCard.xhtml=#{user.sessionID}"/>
 		</p:panelGrid>
 	</h:form>
 	</div>

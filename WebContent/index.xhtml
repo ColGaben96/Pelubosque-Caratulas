@@ -24,11 +24,11 @@
 		<h3 class="d-flex justify-content-center" style="text-align: center;">Pelubosque y Carátulas</h3>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav ml-auto">
-				<li><i class="fas fa-briefcase fa-lg" /> Trabaja con Nosotros </li>
-				<li><i class="fas fa-question fa-lg" /> Como Funciona </li>
-				<li><i class="fas fa-envelope fa-lg" /> Contacto </li>
-				<li><i class="fas fa-plus fa-lg" /> Registrarse </li>
-				<li><i class="fas fa-user-circle fa-lg" /> Mi Cuenta </li>
+				<li><a><i class="fas fa-briefcase fa-lg" /> Trabaja con Nosotros </a></li>
+				<li><a><i class="fas fa-question fa-lg" /> Como Funciona </a></li>
+				<li><a href="mailto:gblancol@unbosque.edu.co" style="color: Black;"><i class="fas fa-envelope fa-lg" /> Contacto </a></li>
+				<li><a href="faces/signup/page1.xhtml" style="color: Black;"><i class="fas fa-plus fa-lg" /> Registrarse </a></li>
+				<li><a href="faces/Aplicacion/login.xhtml" style="color: Black;"><i class="fas fa-user-circle fa-lg" /> Mi Cuenta </a></li>
 			</ul>
 		</div>
 	</nav>
@@ -64,7 +64,7 @@
 						<img class="img-fluid w-75 d-flex justify-content-center" style="margin-left: auto; margin-right: auto;" src="resources/img/TempFoto3.jpg" />
 						<div class="carousel-caption d-none d-md-block bg-dark">
 							<h3><b>Es gratis</b></h3>
-							<button class="btn btn-primary">¡Crea tu cuenta ya!</button>
+							<a href="faces/signup/page1.xhtml"><button class="btn btn-primary">¡Crea tu cuenta ya!</button></a>
 						</div>
 					</div>
 				</div>
@@ -82,7 +82,7 @@
 		<br />
 		<div class="container bg-white">
 			<h1>¿Quieres trabajar con nosotros?</h1>
-			<p:commandButton value="Registrate aquí"></p:commandButton>
+			<p:linkButton value="Registrate aquí" href="faces/signup/page1.xhtml"></p:linkButton>
 		</div>
 	</div>
 	<br />
