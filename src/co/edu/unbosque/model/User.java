@@ -8,6 +8,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.mail.MessagingException;
 import javax.persistence.Entity;
@@ -86,7 +87,7 @@ public class User implements Serializable {
 					FacesContext context = FacesContext.getCurrentInstance();
 					HttpSession facesSession = (HttpSession) context.getExternalContext().getSession(true);
 					try {
-						context.getExternalContext().redirect("index.xhtml");
+						context.getExternalContext().redirect("index.xhtml?sessionID="+sessionID);
 						facesSession.setAttribute("username", name);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
@@ -96,7 +97,7 @@ public class User implements Serializable {
 					FacesContext context = FacesContext.getCurrentInstance();
 					HttpSession facesSession = (HttpSession) context.getExternalContext().getSession(true);
 					try {
-						context.getExternalContext().redirect("index.xhtml");
+						context.getExternalContext().redirect("index.xhtml?sessionID="+sessionID);
 						facesSession.setAttribute("username", name);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
@@ -115,6 +116,7 @@ public class User implements Serializable {
 		}
 		session.getTransaction().commit();
 		session.close();
+		factory.close();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -131,8 +133,8 @@ public class User implements Serializable {
 				if(users.get(i).getRole() == 0) {
 					FacesContext context = FacesContext.getCurrentInstance();
 					HttpSession facesSession = (HttpSession) context.getExternalContext().getSession(true);
-					try {
-						context.getExternalContext().redirect("index.xhtml");
+					try 	{
+						context.getExternalContext().redirect("index.xhtml?sessionID="+sessionID);
 						facesSession.setAttribute("username", name);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
@@ -151,6 +153,7 @@ public class User implements Serializable {
 		}
 		session.getTransaction().commit();
 		session.close();
+		factory.close();
 	}
 	
 	public void createUser() {
@@ -227,6 +230,7 @@ public class User implements Serializable {
 		}
 		session.getTransaction().commit();
 		session.close();
+		factory.close();
 	}
 	
 	public void updateSessionID() {
@@ -239,9 +243,10 @@ public class User implements Serializable {
 		session.beginTransaction();
 		var newSession = new User();
 		newSession.setSessionID(context.getExternalContext().getSessionId(true));
-		session.update(newSession);
+		User updatedUser = session.get(User.class, id);
 		session.getTransaction().commit();
 		session.close();
+		factory.close();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -292,11 +297,14 @@ public class User implements Serializable {
 		HttpSession facesSession = (HttpSession) context.getExternalContext().getSession(true);
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
-		var updatedUser = new User();
-		updatedUser.setAddress(address);
-		session.get(updatedUser.getClass(), sessionID);
+		User updatedUser = session.get(User.class, sessionID);
+		UIViewRoot view = FacesContext.getCurrentInstance().getViewRoot();
+		var newAddress = view.findComponent("CompleteAddress").getAttributes();
+		updatedUser.setAddress(newAddress.get(address).toString());
+		session.update(updatedUser);
 		session.getTransaction().commit();
 		session.close();
+		factory.close();
 		try {
 			context.getExternalContext().redirect("page3.xhtml?sessionID="+sessionID);
 			facesSession.setAttribute("username", name);
@@ -305,6 +313,11 @@ public class User implements Serializable {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public String makeLocation() {
+		UserLocationMaker location = new UserLocationMaker();
+		return location.makeLocation();
 	}
 	
 	public void forgotPassword() {
@@ -338,6 +351,7 @@ public class User implements Serializable {
 		}
 		session.getTransaction().commit();
 		session.close();
+		factory.close();
 	}
 	
 	public void logout() {

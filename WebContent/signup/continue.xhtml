@@ -10,12 +10,9 @@
 <h:head>
 	<title>Pelubosque y Carátulas</title>
 	<h:outputStylesheet library="css" name="bootstrap.css" />
-	<h:outputStylesheet library="css" name="gmaps.css"/>
 	<h:outputScript library="js" name="bootstrap.js" />
 	<script src="https://kit.fontawesome.com/302a1eb3e6.js" />
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"/>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-N194VR_QIP5s_CMoAJs3mYhyQ6YVA4I&amp;callback=initAutocomplete&amp;libraries=places&amp;v=weekly"/>
-	<h:outputScript library="js" name="gmaps.js"/>
 </h:head>
 <header>
 	<nav class="navbar navbar-expand-lg bg-gradient-light">
@@ -27,6 +24,7 @@
 		<c:viewParam name="sessionID" value="#{user.sessionID}"></c:viewParam>
 	</c:metadata>
 	<p>#{user.validateSessionID()}</p>
+	<p>#{userlocation.initialize()}</p>
 	<br />
 	<c:attribute name="username" value="#{user.name}"/>
 	<h1 style="text-align:center;">¡Hola #{username}!</h1>
@@ -36,10 +34,13 @@
 	<h:form class="form">
 		<p:growl id="messages" showDetail="true" sticky="true"/>		
 		<p:panelGrid style="border:none;" columns="2" cellpadding="5" styleClass="ui-noborder">
-			<p:inputText id="autocomplete" value="#{user.address}" autocomplete="true" pt:placeholder="Dirección" required="true" onfocus="geolocate()" validatorMessage="El nombre no puede estar vacio"/>
+			<p:autoComplete scrollHeight="150" cache="true" forceSelection="true" size="30" active="true" autoHighlight="true" emptyMessage="Cargando..." autocomplete="true" autoSelection="true" pt:placeholder="Departamento" value="#{userlocation.state}" completeMethod="#{userlocation.getAllStates()}"/>
+			<p:autoComplete scrollHeight="150" cache="true" forceSelection="true" size="30" active="true" autoHighlight="true" emptyMessage="Cargando..." autocomplete="true" autoSelection="true" pt:placeholder="Municipio" value="#{userlocation.town}" completeMethod="#{userlocation.getTowns()}"/>
+			<p:inputText name="address" id="address" pt:placeholder="Dirección" value="#{userlocation.address}" dropdown="true" forceSelection="true"/>
 			<p:selectCheckboxMenu id="preferredSede" pt:placeholder="Sedes Preferidas" label="Sede Preferida" multiple="false" style="width:170px">
 					<c:selectItems value="#{server.db.getLOCATIONS()}"/>
 			</p:selectCheckboxMenu>
+			<e:set var="CompleteAddress"  value="#{userlocation.makeLocation()}"/>
 			<p:commandButton value="Siguiente" action="#{user.newUserUploadAddress()}"></p:commandButton>
 		</p:panelGrid>
 	</h:form>
