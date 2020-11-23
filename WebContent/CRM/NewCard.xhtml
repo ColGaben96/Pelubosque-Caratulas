@@ -25,18 +25,22 @@ function goBack() {
 	</nav>
 </header>
 <h:body>
+	<c:metadata>
+		<c:viewParam name="sessionID" value="#{user.sessionID}"></c:viewParam>
+	</c:metadata>
+	<p>#{user.validateSessionID()}</p>
 	<div class="container d-flex justify-content-center">
 	<h:form class="form">
 		<p:growl id="messages" showDetail="true" sticky="true"/>	
 		<p:panelGrid style="border:none;" columns="4" cellpadding="5" styleClass="ui-noborder">
-			<p:inputNumber id="cardCheck" thousandSeparator="" decimalPlaces="0" pt:placeholder="Num Tarjeta"/>
-			<p:datePicker id="expDate" pattern="MM/yyyy" view="month" yearNavigator="true" yearRange="2020:2040" pt:placeholder="Fecha Expiración"/>
-			<p:inputNumber id="ccv" pt:placeholder="CCV"/>
-			<p:inputText id="owner" pt:placeholder="Titular de la tarjeta"/>
-			<p:commandButton id="oneMoreCard" icon="fas fa-plus"/>
+			<p:inputText id="cardCheck" pt:placeholder="Num Tarjeta" value="#{user.cardnumber}"/>
+			<p:datePicker id="expDate" pattern="MM/yyyy" view="month" yearNavigator="true" yearRange="2020:2040" pt:placeholder="Fecha Expiración" value="#{user.cardExpdateForm}"/>
+			<p:inputText thousandSeparator="" id="ccv" pt:placeholder="CCV" value="#{user.cardccv}"/>
+			<p:inputText id="owner" pt:placeholder="Titular de la tarjeta" value="#{user.cardBelongsTo}"/>
 		</p:panelGrid>
 		<p:panelGrid columns="2" styleClass="ui-noborder">
-			<p:commandButton value="Inscribir Tarjeta"/>
+			<p:linkButton value="Cancelar" href="../Aplicacion/index.xhtml?sessionID=#{sessionID}"/>
+			<p:commandButton value="Inscribir Tarjeta" update="messages" action="#{user.newUserCard()}"/>
 		</p:panelGrid>
 	</h:form>
 	</div>
