@@ -1,4 +1,4 @@
-package co.edu.unbosque.model;
+package co.edu.unbosque.model.persistence;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
+
+import co.edu.unbosque.model.User;
 
 @ManagedBean(name="db")
 public class DatabaseConnection {
@@ -167,14 +169,34 @@ public class DatabaseConnection {
 		return msg;
 	}
 	
-	public void updateUserAddress() {
+	public void updateUserAddress(User userobj, String address) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String user = "ImmnUr2vPP";
 			String pass = "MLSgcm7woJ";
 			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
 			statement = con.createStatement();
-			ResultSet result = statement.executeQuery("SELECT * FROM `divipolaTown` WHERE state = ");
+			int result = statement.executeUpdate("UPDATE `Users` SET"
+					+ "`username`='"+userobj.getUsername()+"',"
+					+ "`Appointments`='"+userobj.getAppointments()+"',"
+					+ "`address`='"+address+"',"
+					+ "`birthday`='"+userobj.getBirthday()+"',"
+					+ "`clients`='"+userobj.getClients()+"',"
+					+ "`email`='"+userobj.getEmail()+"',"
+					+ "`genre`='"+userobj.getGenre()+"',"
+					+ "`id`="+userobj.getId()+","
+					+ "`name`='"+userobj.getName()+"',"
+					+ "`noid`='"+userobj.getNoid()+"',"
+					+ "`nomenAddress`= null,"
+					+ "`password`='"+userobj.getPassword()+"',"
+					+ "`paymentMethod`='"+userobj.getPaymentMethod()+"',"
+					+ "`phone`='"+userobj.getPhone()+"',"
+					+ "`role`="+userobj.getRole()+","
+					+ "`sessionID`='"+userobj.getSessionID()+"',"
+					+ "`state`= null,"
+					+ "`toid`='[value-18]',"
+					+ "`town`= null");
+			System.out.println("Operation Status Code: "+result);
 			con.close();
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();

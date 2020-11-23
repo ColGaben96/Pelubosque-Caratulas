@@ -13,9 +13,6 @@
 	<h:outputStylesheet library="css" name="gmaps.css"/>
 	<h:outputScript library="js" name="bootstrap.js" />
 	<script src="https://kit.fontawesome.com/302a1eb3e6.js" />
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"/>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-N194VR_QIP5s_CMoAJs3mYhyQ6YVA4I&amp;callback=initAutocomplete&amp;libraries=places&amp;v=weekly"/>
-	<h:outputScript library="js" name="gmaps.js"/>
 </h:head>
 <header>
 	<nav class="navbar navbar-expand-lg bg-gradient-light">
@@ -23,23 +20,27 @@
 	</nav>
 </header>
 <h:body>
+<c:metadata>
+		<c:viewParam name="sessionID" value="#{user.sessionID}"></c:viewParam>
+	</c:metadata>
+	<p>#{user.validateSessionID()}</p>
 	<br />
-	<h1 style="text-align:center;">¡Gracias #{nombre}!</h1>
+	<c:attribute name="username" value="#{user.name}"/>
+	<h1 style="text-align:center;">¡Gracias #{username}!</h1>
 	<p style="text-align:center;">Estas a un paso</p>
 	<br />
 	<div class="container d-flex justify-content-center">
 	<h:form class="form">
 		<p:growl id="messages" showDetail="true" sticky="true"/>	
 		<p:panelGrid style="border:none;" columns="4" cellpadding="5" styleClass="ui-noborder">
-			<p:inputNumber id="cardCheck" thousandSeparator="" decimalPlaces="0" pt:placeholder="Num Tarjeta"/>
-			<p:datePicker id="expDate" pattern="MM/yyyy" view="month" yearNavigator="true" yearRange="2020:2040" pt:placeholder="Fecha Expiración"/>
-			<p:inputNumber id="ccv" pt:placeholder="CCV"/>
-			<p:inputText id="owner" pt:placeholder="Titular de la tarjeta"/>
-			<p:commandButton id="oneMoreCard" icon="fas fa-plus"/>
+			<p:inputText id="cardCheck" pt:placeholder="Num Tarjeta" value="#{user.cardnumber}"/>
+			<p:datePicker id="expDate" pattern="MM/yyyy" view="month" yearNavigator="true" yearRange="2020:2040" pt:placeholder="Fecha Expiración" value="#{user.cardexpDate}"/>
+			<p:inputText thousandSeparator="" id="ccv" pt:placeholder="CCV" value="#{user.cardccv}"/>
+			<p:inputText id="owner" pt:placeholder="Titular de la tarjeta" value="#{user.cardBelongsTo}"/>
 		</p:panelGrid>
 		<p:panelGrid columns="2" styleClass="ui-noborder">
-			<p:link value="Mejor solo pago en efectivo"/>
-			<p:commandButton value="Inscribir Tarjeta"/>
+			<p:commandLink value="Mejor pago en efectivo" action="#{user.doneRegistration()}"/>
+			<p:commandButton value="Inscribir Tarjeta" update="messages" action="#{user.newRegistrationUserCard()}"/>
 		</p:panelGrid>
 	</h:form>
 	</div>

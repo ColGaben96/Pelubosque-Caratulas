@@ -34,13 +34,12 @@
 	<h:form class="form">
 		<p:growl id="messages" showDetail="true" sticky="true"/>		
 		<p:panelGrid style="border:none;" columns="2" cellpadding="5" styleClass="ui-noborder">
-			<p:autoComplete scrollHeight="150" cache="true" forceSelection="true" size="30" active="true" autoHighlight="true" emptyMessage="Cargando..." autocomplete="true" autoSelection="true" pt:placeholder="Departamento" value="#{userlocation.state}" completeMethod="#{userlocation.getAllStates()}"/>
-			<p:autoComplete scrollHeight="150" cache="true" forceSelection="true" size="30" active="true" autoHighlight="true" emptyMessage="Cargando..." autocomplete="true" autoSelection="true" pt:placeholder="Municipio" value="#{userlocation.town}" completeMethod="#{userlocation.getTowns()}"/>
-			<p:inputText name="address" id="address" pt:placeholder="Dirección" value="#{userlocation.address}" dropdown="true" forceSelection="true"/>
+			<p:autoComplete scrollHeight="150" cache="true" forceSelection="true" size="30" active="true" autoHighlight="true" emptyMessage="Cargando..." autocomplete="true" autoSelection="true" pt:placeholder="Departamento" value="#{user.state}" completeMethod="#{userlocation.getAllStates()}"/>
+			<p:autoComplete scrollHeight="150" cache="true" forceSelection="true" size="30" active="true" autoHighlight="true" emptyMessage="Cargando..." autocomplete="true" autoSelection="true" pt:placeholder="Municipio" value="#{user.town}" completeMethod="#{userlocation.getTowns()}"/>
+			<p:inputText name="address" id="address" pt:placeholder="Dirección" value="#{user.nomenAddress}" dropdown="true" forceSelection="true"/>
 			<p:selectCheckboxMenu id="preferredSede" pt:placeholder="Sedes Preferidas" label="Sede Preferida" multiple="false" style="width:170px">
 					<c:selectItems value="#{server.db.getLOCATIONS()}"/>
 			</p:selectCheckboxMenu>
-			<e:set var="CompleteAddress"  value="#{userlocation.makeLocation()}"/>
 			<p:commandButton value="Siguiente" action="#{user.newUserUploadAddress()}"></p:commandButton>
 		</p:panelGrid>
 	</h:form>

@@ -1,10 +1,12 @@
 
-package co.edu.unbosque.model;
+package co.edu.unbosque.model.util;
 
 import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
+import co.edu.unbosque.model.persistence.DatabaseConnection;
 
 @ManagedBean(name="userlocation")
 @SessionScoped
@@ -47,7 +49,7 @@ public class UserLocationMaker {
 		return towns;
 	}
 	
-	public String makeLocation() {
+	public String makeLocation(String address, String town, String state) {
 		completeAddress = address+", "+town+", "+state;
 		System.out.println(completeAddress);
 		return completeAddress;
@@ -67,6 +69,14 @@ public class UserLocationMaker {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public ArrayList<String> getWholeTown() {
+		return wholeTown;
+	}
+
+	public void setWholeTown(ArrayList<String> wholeTown) {
+		this.wholeTown = wholeTown;
 	}
 
 	public String getTown() {
