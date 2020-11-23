@@ -56,7 +56,6 @@ public class User {
 	private String phone;
 	@Column(name="birthday")
 	private String birthday;
-	private Date birthdayForm;
 	@Column(name="toid")
 	private String toid;
 	@Column(name="noid")
@@ -64,11 +63,11 @@ public class User {
 	@Column(name="sessionID", nullable = false)
 	private String sessionID;
 	@Column(name="paymentMethod")
-	private ArrayList<CreditCard> paymentMethod = new ArrayList<CreditCard>();
+	private ArrayList<CreditCard> paymentMethod;
 	@Column(name="Appointments")
-	private ArrayList<Appointments> Appointments = new ArrayList<Appointments>();
+	private ArrayList<Appointments> Appointments;
 	@Column(name="clients")
-	private ArrayList<User> clients = new ArrayList<User>();
+	private ArrayList<User> clients;
 	@Column(name="Active")
 	private boolean active;
 	@Column(name="DoneRegistration")
@@ -78,7 +77,6 @@ public class User {
 	private String cardBelongsTo;
 	private String cardFranchise;
 	private String cardexpDate;
-	private Date cardExpdateForm;
 	public User() {
 		
 	}
@@ -200,6 +198,7 @@ public class User {
 		factory.close();
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void createUser() {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cargando...",null);
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -211,8 +210,8 @@ public class User {
 				.addAnnotatedClass(User.class)
 				.buildSessionFactory();
 		Session session = factory.getCurrentSession();
-		User newUser = new User(1, name, username, email, genre, password, null, phone,
-					new DateMaker().date2String(birthdayForm), toid, noid, null, null, null, sessionID, false, false);
+		var newUser = new User(1, name, username, email, genre, password, null, phone,
+				new DateMaker().date2String(Date.parse(birthday)), toid, noid, null, null, null, sessionID, false, false);
 		session.beginTransaction();
 		session.save(newUser);
 		try {
@@ -327,7 +326,7 @@ public class User {
 		facesSession.setAttribute("username", users.get(0).getName());
 		session.getTransaction().commit();
 		session.close();
-		factory.close();
+		
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -500,72 +499,75 @@ public class User {
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
 		List<User> users = session.createQuery("from User where sessionID = '"+sessionID+"'").list();
-		var newCardNumber = cardnumber.split("");
-		if(newCardNumber[0] == "3" && newCardNumber[1] == "5"
-				|| newCardNumber[0] == "3" && newCardNumber[1] == "7") {
+		if(cardnumber.startsWith("34") 
+				|| cardnumber.startsWith("37")) {
 			var newNumber = "terminada en ";
-			for (int i = newCardNumber.length-1; i >= newCardNumber.length-4; i--) {
+			var newCardNumber = cardnumber.split("");
+			for (int i = newCardNumber.length; i >= 10; i--) {
 				newNumber += newCardNumber[i];
 			}
-			CreditCard newcc = new CreditCard(newNumber, cardccv, cardBelongsTo, CreditCard.AMERICANEXPRESS, new DateMaker().date2exp(cardExpdateForm));
-			users.get(0).getPaymentMethod().add(newcc);
-			session.update(users.get(0));
-			try {
-				emailer.sendEmail(email, "Registramos tu "+newNumber+" "+newcc.getFranchise()+" exitosamente", "<!DOCTYPE html>\n"
-						+ "<html>\n"
-						+ "    <head>\n"
-						+ "        <meta charset=\"UTF-8\">\n"
-						+ "    </head>\n"
-						+ "    <body>\n"
-						+ "        <h1>Hola "+name+"</h1><br>\n"
-						+ "        <p>Queremos informarte que desactivaste tu tarjeta "+newcc.getFranchise()+" "+newNumber+" ha sido registrada exitosamente.</p> <br>\n"
-						+ "        <p>Cualquier inconformidad puedes contactar a gblancol@unbosque.edu.co</p><br>\n"
-						+ "        <p>Quedamos atentos,</p><br>\n"
-						+ "        <p>El equipo de Pelubosque y Carátulas</p>\n"
-						+ "    </body>\n"
-						+ "</html>");
-			} catch (MessagingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			CreditCard newcc = new CreditCard(newNumber, cardccv, cardBelongsTo, CreditCard.AMERICANEXPRESS, cardexpDate);
+			paymentMethod.add(newcc);
+			users.get(0).setPaymentMethod(paymentMethod);
 			
-		} else if(newCardNumber[0] == "4") {
+		} else if(cardnumber.startsWith("4")) {
 			var newNumber = "terminada en ";
-			for (int i = newCardNumber.length-1; i >= newCardNumber.length-4; i--) {
+			var newCardNumber = cardnumber.split("");
+			for (int i = newCardNumber.length; i >= 11; i--) {
 				newNumber += newCardNumber[i];
 			}
-			CreditCard newcc = new CreditCard(newNumber, cardccv, cardBelongsTo, CreditCard.VISA, new DateMaker().date2exp(cardExpdateForm));
-			users.get(0).getPaymentMethod().add(newcc);
-			session.update(users.get(0));
+			CreditCard newcc = new CreditCard(newNumber, cardccv, cardBelongsTo, CreditCard.VISA, cardexpDate);
+			paymentMethod.add(newcc);
+			users.get(0).setPaymentMethod(paymentMethod);
 			
-		} else if(newCardNumber[0] == "5" && newCardNumber[1] == "1"
-				|| newCardNumber[0] == "5" && newCardNumber[1] == "2"
-				|| newCardNumber[0] == "5" && newCardNumber[1] == "3"
-				|| newCardNumber[0] == "5" && newCardNumber[1] == "4" 
-				|| newCardNumber[0] == "5" && newCardNumber[1] == "5") {
+		} else if(cardnumber.startsWith("51") 
+				|| cardnumber.startsWith("52") 
+				|| cardnumber.startsWith("53") 
+				|| cardnumber.startsWith("54") 
+				|| cardnumber.startsWith("55")) {
 			var newNumber = "terminada en ";
-			for (int i = newCardNumber.length-1; i >= newCardNumber.length-4; i--) {
+			var newCardNumber = cardnumber.split("");
+			for (int i = newCardNumber.length; i >= 11; i--) {
 				newNumber += newCardNumber[i];
 			}
-			CreditCard newcc = new CreditCard(newNumber, cardccv, cardBelongsTo, CreditCard.MASTERCARD, new DateMaker().date2exp(cardExpdateForm));
-			users.get(0).getPaymentMethod().add(newcc);
-			session.update(users.get(0));
+			CreditCard newcc = new CreditCard(newNumber, cardccv, cardBelongsTo, CreditCard.MASTERCARD, cardexpDate);
+			paymentMethod.add(newcc);
+			users.get(0).setPaymentMethod(paymentMethod);
 			
 		} else {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","La tarjeta no es válida");
 			FacesContext.getCurrentInstance().addMessage("badLogin", message);
 		}
-		try {
-			
-			context.getExternalContext().redirect("userDone.xhtml?sessionID="+users.get(0).getSessionID());
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		session.getTransaction().begin();
 		session.close();
 		factory.close();
+		var newFranchise = "";
+		for (int i = 0; i < paymentMethod.size(); i++) {
+			newFranchise = paymentMethod.get(i).getFranchise();
+		}
+		var newCardNumber = "";
+		for (int i = 0; i < paymentMethod.size(); i++) {
+			newCardNumber = paymentMethod.get(i).getNumber();
+		}
+		try {
+			emailer.sendEmail(email, "Registramos tu "+newFranchise+" "+newCardNumber+" exitosamente", "<!DOCTYPE html>\n"
+					+ "<html>\n"
+					+ "    <head>\n"
+					+ "        <meta charset=\"UTF-8\">\n"
+					+ "    </head>\n"
+					+ "    <body>\n"
+					+ "        <h1>Hola "+name+"</h1><br>\n"
+					+ "        <p>Queremos informarte que desactivaste tu tarjeta "+newFranchise+" "+newCardNumber+" ha sido registrada exitosamente.</p> <br>\n"
+					+ "        <p>Cualquier inconformidad puedes contactar a gblancol@unbosque.edu.co</p><br>\n"
+					+ "        <p>Quedamos atentos,</p><br>\n"
+					+ "        <p>El equipo de Pelubosque y Carátulas</p>\n"
+					+ "    </body>\n"
+					+ "</html>");
+			context.getExternalContext().redirect("../Aplicacion/index.xhtml");
+		} catch (IOException | MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -575,71 +577,61 @@ public class User {
 				.configure()
 				.addAnnotatedClass(User.class)
 				.buildSessionFactory();
-		Session session = factory.openSession();
+		Session session = factory.getCurrentSession();
 		session.beginTransaction();
 		List<User> users = session.createQuery("from User where sessionID = '"+sessionID+"'").list();
-		var newCardNumber = users.get(0).getCardnumber().split("");
-		if(newCardNumber[0] == "3" && newCardNumber[1] == "5"
-				|| newCardNumber[0] == "3" && newCardNumber[1] == "7") {
+		if(cardnumber.startsWith("34") 
+				|| cardnumber.startsWith("37")) {
 			var newNumber = "terminada en ";
-			for (int i = newCardNumber.length-1; i >= newCardNumber.length-4; i--) {
+			var newCardNumber = cardnumber.split("");
+			for (int i = newCardNumber.length; i >= 10; i--) {
 				newNumber += newCardNumber[i];
 			}
-			CreditCard newcc = new CreditCard(newNumber, cardccv, cardBelongsTo, CreditCard.AMERICANEXPRESS, new DateMaker().date2exp(cardExpdateForm));
-			if(users.get(0).getPaymentMethod() != null) {
-				users.get(0).getPaymentMethod().add(newcc);
-			} else {
-				users.get(0).setPaymentMethod(new ArrayList<CreditCard>());
-				users.get(0).getPaymentMethod().add(newcc);
-			}
-			session.update(users.get(0));
+			CreditCard newcc = new CreditCard(newNumber, cardccv, cardBelongsTo, CreditCard.AMERICANEXPRESS, cardexpDate);
+			paymentMethod.add(newcc);
+			users.get(0).setPaymentMethod(paymentMethod);
 			
-		} else if(newCardNumber[0] == "4") {
+		} else if(cardnumber.startsWith("4")) {
 			var newNumber = "terminada en ";
-			for (int i = newCardNumber.length-1; i >= newCardNumber.length-4; i--) {
+			var newCardNumber = cardnumber.split("");
+			for (int i = newCardNumber.length; i >= 11; i--) {
 				newNumber += newCardNumber[i];
 			}
-			CreditCard newcc = new CreditCard(newNumber, cardccv, cardBelongsTo, CreditCard.VISA, new DateMaker().date2exp(cardExpdateForm));
-			if(users.get(0).getPaymentMethod() != null) {
-				users.get(0).getPaymentMethod().add(newcc);
-			} else {
-				users.get(0).setPaymentMethod(new ArrayList<CreditCard>());
-				users.get(0).getPaymentMethod().add(newcc);
-			}
-			session.update(users.get(0));
+			CreditCard newcc = new CreditCard(newNumber, cardccv, cardBelongsTo, CreditCard.VISA, cardexpDate);
+			paymentMethod.add(newcc);
+			users.get(0).setPaymentMethod(paymentMethod);
 			
-		} else if(newCardNumber[0] == "5" && newCardNumber[1] == "1"
-				|| newCardNumber[0] == "5" && newCardNumber[1] == "2"
-				|| newCardNumber[0] == "5" && newCardNumber[1] == "3"
-				|| newCardNumber[0] == "5" && newCardNumber[1] == "4" 
-				|| newCardNumber[0] == "5" && newCardNumber[1] == "5") {
+		} else if(cardnumber.startsWith("51") 
+				|| cardnumber.startsWith("52") 
+				|| cardnumber.startsWith("53") 
+				|| cardnumber.startsWith("54") 
+				|| cardnumber.startsWith("55")) {
 			var newNumber = "terminada en ";
-			for (int i = newCardNumber.length-1; i >= newCardNumber.length-4; i--) {
+			var newCardNumber = cardnumber.split("");
+			for (int i = newCardNumber.length; i >= 11; i--) {
 				newNumber += newCardNumber[i];
 			}
-			CreditCard newcc = new CreditCard(newNumber, cardccv, cardBelongsTo, CreditCard.MASTERCARD, new DateMaker().date2exp(cardExpdateForm));
-			if(users.get(0).getPaymentMethod() != null) {
-				users.get(0).getPaymentMethod().add(newcc);
-			} else {
-				users.get(0).setPaymentMethod(new ArrayList<CreditCard>());
-				users.get(0).getPaymentMethod().add(newcc);
-			}
-			session.update(users.get(0));
+			CreditCard newcc = new CreditCard(newNumber, cardccv, cardBelongsTo, CreditCard.MASTERCARD, cardexpDate);
+			paymentMethod.add(newcc);
+			users.get(0).setPaymentMethod(paymentMethod);
 			
 		} else {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","La tarjeta no es válida");
 			FacesContext.getCurrentInstance().addMessage("badLogin", message);
 		}
+		session.getTransaction().begin();
+		session.close();
+		factory.close();
 		var newFranchise = "";
 		for (int i = 0; i < paymentMethod.size(); i++) {
-			newFranchise = users.get(0).getPaymentMethod().get(i).getFranchise();
+			newFranchise = paymentMethod.get(i).getFranchise();
 		}
-		var newCardNumber2 = "";
+		var newCardNumber = "";
 		for (int i = 0; i < paymentMethod.size(); i++) {
-			newCardNumber2 = users.get(0).getPaymentMethod().get(i).getNumber();
+			newCardNumber = paymentMethod.get(i).getNumber();
 		}
 		try {
-			emailer.sendEmail(email, "Registramos tu "+newFranchise+" "+newCardNumber2+" exitosamente", "<!DOCTYPE html>\n"
+			emailer.sendEmail(email, "Registramos tu "+newFranchise+" "+newCardNumber+" exitosamente", "<!DOCTYPE html>\n"
 					+ "<html>\n"
 					+ "    <head>\n"
 					+ "        <meta charset=\"UTF-8\">\n"
@@ -657,9 +649,6 @@ public class User {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		session.getTransaction().begin();
-		session.close();
-		factory.close();
 	}
 
 	public String getBirthday() {
@@ -841,21 +830,5 @@ public class User {
 
 	public void setCardexpDate(String cardexpDate) {
 		this.cardexpDate = cardexpDate;
-	}
-
-	public Date getBirthdayForm() {
-		return birthdayForm;
-	}
-
-	public void setBirthdayForm(Date birthdayForm) {
-		this.birthdayForm = birthdayForm;
-	}
-
-	public Date getCardExpdateForm() {
-		return cardExpdateForm;
-	}
-
-	public void setCardExpdateForm(Date cardExpdateForm) {
-		this.cardExpdateForm = cardExpdateForm;
 	}
 }

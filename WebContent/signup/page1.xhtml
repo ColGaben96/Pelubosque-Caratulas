@@ -31,7 +31,7 @@
 				<c:selectItem itemLabel="Género"/>
 				<c:selectItems value="#{server.db.getGENRES()}"/>
 			</p:selectOneMenu>
-			<p:datePicker pt:placeholder="Fecha de Nacimiento" pattern="dd/MM/yyyy" yearRange="1900:2100" yearNavigator="true" monthNavigator="true" value="#{user.birthdayForm}"/>
+			<p:datePicker pt:placeholder="Fecha de Nacimiento" pattern="dd/MM/yyyy" selectionMode="range" yearRange="1900:2100" yearNavigator="true" monthNavigator="true" value="#{user.birthday}"/>
 			<p:inputText pt:placeholder="Teléfono" required="true" value="#{user.phone}" requiredMessage="El teléfono no puede estar vacio"/>
 			<p:selectOneMenu required="true" value="#{user.toid}" requiredMessage="Debes seleccionar un tipo de identificación">
 				<c:selectItem itemLabel="Tipo de Identificación"/>
