@@ -3,6 +3,8 @@
 	<persistence-unit name="PelubosqueCaratulas" transaction-type="RESOURCE_LOCAL">
 		<class>co.edu.unbosque.model.User</class>
 		<class>co.edu.unbosque.model.Locations</class>
+		<class>co.edu.unbosque.model.divipola.States</class>
+		<class>co.edu.unbosque.model.divipola.Towns</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://remotemysql.com:3306/ImmnUr2vPP"/>
 			<property name="javax.persistence.jdbc.user" value="ImmnUr2vPP"/>

@@ -34,10 +34,7 @@
 			</div>
 			<h2 style="text-align: center;">¡Gracias #{username}!</h2>
 			<p style="text-align: center;">Terminaste de manera satisfactoria tu registro.</p>
-			<div class="d-flex justify-content-end">
-				<p:linkButton value="Haz click aquí para acceder a tu cuenta" href="index.xhtml?sessionID=#{user.sessionID}"/>
-			</div>
-
+			<p:commandButton value="Haz click aquí para acceder a tu cuenta" onfocus="#{user.doneRegistration()}" action="#{user.doneRegistration()}"/>
 		</p:panelGrid>
 	</div>
 	<br />

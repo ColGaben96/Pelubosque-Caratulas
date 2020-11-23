@@ -29,6 +29,7 @@
 	</c:metadata>
 	<p>#{user.validateSessionID()}</p>
 	<p>#{user.checkPermissions()}</p>
+	<p>#{user.checkUserData()}</p>
 	<c:attribute name="userRole" value="#{user.checkPermissions()}"/>
 	<c:attribute name="professionalRole" value="#{user.checkPermissions()}"/>
 	<p:sidebar widgetVar="sidebarOperations" baseZIndex="10000">
@@ -42,7 +43,7 @@
 			<p><a href="Account.xhtml" style="color: Black;"><i class="fas fa-user-edit"/> Mi Cuenta</a></p>
 			<p><a href="Payments.xhtml" style="color: Black;"><i class="fas fa-credit-card"/> Mis Medios de Pago</a></p>
 			<p><a href="Appointments.xhtml" style="color: Black;"><i class="fas fa-calendar-alt"/> Mis Citas</a></p>
-			<p><a onclick="#{user.logout()}" style="color: Black;"><i class="fas fa-door-open"/> Cerrar Sesion</a></p>
+			<p><a href="../index.xhtml" style="color: Black;"><i class="fas fa-door-open"/> Cerrar Sesion</a></p>
 		</p:panelGrid>
 		<p:panelGrid columns="1" styleClass="ui-noborder" id="professionalPanel" rendered="#{professionalRole}">
 			<p><a href="Account.xhtml" style="color: Black;"><i class="fas fa-user-edit"/> Mi Cuenta</a></p>
@@ -51,10 +52,44 @@
 			<p><a href="Clients.xhtml" style="color: Black;"><i class="fas fa-users"/> Mis Clientes</a></p>
 			<p><a href="Assigned.xhtml" style="color: Black;"><i class="fas fa-calendar-check"/> Mis Citas Asignadas</a></p>
 			<p><a href="PaymentCollection.xhtml" style="color: Black;"><i class="fas fa-piggy-bank"/> Mis Recaudos</a></p>
-			<p><a onclick="#{user.logout()}" style="color: Black;"><i class="fas fa-door-open"/> Cerrar Sesion</a></p>
+			<p><a href="../index.xhtml" style="color: Black;"><i class="fas fa-door-open"/> Cerrar Sesion</a></p>
 		</p:panelGrid>
 	</p:sidebar>
-	
+	<div class="container">
+		<h1 style="text-align: center;"><i class="fas fa-user-circle fa-5x"/></h1>
+		<h3 style="text-align: center;">#{username}</h3>
+		<h:form class="form-group d-flex justify-content-center">		
+				<p:panelGrid columns="1" styleClass="ui-noborder">
+					<h4 style="text-align: center;">Mis datos</h4>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<c:attribute name="userid" value="#{user.username}"/>
+						<c:attribute name="usergenre" value="#{user.genre}"/>
+						<c:attribute name="userbirthday" value="#{user.birthday}"/>
+						<c:attribute name="useraddress" value="#{user.address}"/>
+						<c:attribute name="userIdentifiactionType" value="#{user.toid}"/>
+						<c:attribute name="userIdentifiactionNumber" value="#{user.noid}"/>
+						<p:inputText pt:placeholder="Usuario" disabled="true" value="#{userid}"/>
+						<p:selectOneMenu required="true" value="#{usergenre}" requiredMessage="El género es requerido">
+							<c:selectItem itemLabel="Género"/>
+							<c:selectItems value="#{server.db.getGENRES()}"/>
+						</p:selectOneMenu>
+						<p:datePicker pt:placeholder="Fecha de Nacimiento" pattern="dd/MM/yyyy" selectionMode="range" yearRange="1900:2100" yearNavigator="true" monthNavigator="true" value="#{userbirthday}"/>
+						<p:inputText pt:placeholder="Dirección" value="#{useraddress}"/>
+						<p:inputText pt:placeholder="Tipo ID" disabled="true" value="#{userIdentifiactionType}"/>
+						<p:inputText pt:placeholder="Numero ID" disabled="true" value="#{userIdentifiactionNumber}"/>
+					</p:panelGrid>
+					<h4 style="text-align: center;">Actualizar contraseña</h4>
+					<p:panelGrid columns="2" styleClass="ui-noborder">
+						<p:password id="pwd1" pt:placeholder="Contraseña" required="true" value="#{user.password}" feedback="true" maxlength="8" match="pwd2" requiredMessage="La contraseña no puede ser vacia" validatorMessage="La contraseña debe tener mínimo 5 caracteres" weakLabel="Débil" goodLabel="Buena" strongLabel="Adecuada" promptLabel="Ingresa una contraseña">
+							<c:validateLength minimum="5"></c:validateLength>
+						</p:password>
+					<p:password id="pwd2" pt:placeholder="Confirmar Contraseña" maxlength="8" feedback="true" required="true" requiredMessage="La contraseña no puede ser vacia" validatorMessage="Las contraseñas deben ser iguales" weakLabel="Débil" goodLabel="Buena" strongLabel="Adecuada" promptLabel="Ingresa una contraseña"/>
+					<p:commandButton value="Desactivar mi cuenta" styleClass="btn btn-danger" icon="fas fa-angle-double-down"/>
+					<p:commandButton value="Guardar Datos" icon="fas fa-save"/>
+				</p:panelGrid>
+			</p:panelGrid>
+		</h:form>
+	</div>
 	<br />
 </h:body>
 <footer class="bg-dark">

@@ -5,6 +5,21 @@
 // parameter when you first load the API. For example:
 // <script
 // src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+var placeSearch, autocomplete;
+
+function initialize() {
+    // Create the autocomplete object, restricting the search
+    // to geographical location types.
+    autocomplete = new google.maps.places.Autocomplete(
+    /** @type {HTMLInputElement} */
+    (document.getElementById('autocomplete')), {
+        types: ['geocode']
+    });
+
+    google.maps.event.addDomListener(document.getElementById('autocomplete'), 'focus', geolocate);
+}
+
 let placeSearch;
 let autocomplete;
 const componentForm = {
@@ -20,8 +35,8 @@ function initAutocomplete() {
   // Create the autocomplete object, restricting the search predictions to
   // geographical location types.
   var defaultBounds = new google.maps.LatLngBounds(
-  new google.maps.LatLng(17.1782, -82.2082),
-  new google.maps.LatLng(-3.3165, 64.8427));
+  new google.maps.LatLng(12.633958, -81.769143),
+  new google.maps.LatLng(-5.164808, -66.63646));
   autocomplete = new google.maps.places.Autocomplete(
     document.getElementById("autocomplete"),
     { bounds: defaultBounds, types: ["address"] }
@@ -56,20 +71,4 @@ function fillInAddress() {
   }
 }
 
-// Bias the autocomplete object to the user's geographical location,
-// as supplied by the browser's 'navigator.geolocation' object.
-function geolocate() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const geolocation = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      };
-      const circle = new google.maps.Circle({
-        center: geolocation,
-        radius: position.coords.accuracy,
-      });
-      autocomplete.setBounds(circle.getBounds());
-    });
-  }
-}
+initialize();
