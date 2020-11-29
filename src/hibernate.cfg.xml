@@ -17,6 +17,7 @@
 		<!-- Set mapping of user -->
 		<mapping class="co.edu.unbosque.model.User"/>
 		<mapping class="co.edu.unbosque.model.Locations"/>
+		<mapping class="co.edu.unbosque.model.Appointments"/>
 		<mapping class="co.edu.unbosque.model.util.UserLocationMaker"/>
 		<mapping class="co.edu.unbosque.model.divipola.States"/>
 		<mapping class="co.edu.unbosque.model.divipola.Towns"/>

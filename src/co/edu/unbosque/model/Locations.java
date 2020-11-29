@@ -1,14 +1,19 @@
 package co.edu.unbosque.model;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -62,12 +67,30 @@ public class Locations {
 		this.maxCapacity = maxCapacity;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Locations> listAll() {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cargando...",null);
+		FacesMessage Ready = new FacesMessage(FacesMessage.SEVERITY_INFO, "Punto agregado",null);
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage("messages", message);
+		SessionFactory factory = new Configuration()
+				.configure()
+				.addAnnotatedClass(Locations.class)
+				.buildSessionFactory();
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		var locationList = session.createQuery("from Locations").list();
+		session.getTransaction().commit();
+		session.close();
+		context.addMessage("messages", Ready);
+		return locationList;
+	}
+	
 	public void createLocation() {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cargando...",null);
+		FacesMessage Ready = new FacesMessage(FacesMessage.SEVERITY_INFO, "Punto agregado",null);
 		FacesContext context = FacesContext.getCurrentInstance();
-		HttpSession facesSession = (HttpSession) context.getExternalContext().getSession(true);
 		context.addMessage("messages", message);
-		String sessionID = context.getExternalContext().getSessionId(true);
 		SessionFactory factory = new Configuration()
 				.configure()
 				.addAnnotatedClass(Locations.class)
@@ -78,6 +101,14 @@ public class Locations {
 		session.save(newLocation);
 		session.getTransaction().commit();
 		session.close();
+		context.addMessage("messages", Ready);
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		try {
+			ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

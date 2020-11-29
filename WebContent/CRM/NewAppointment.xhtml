@@ -12,19 +12,11 @@
 	<h:outputScript library="js" name="bootstrap.js" />
 	<script src="https://kit.fontawesome.com/302a1eb3e6.js" />
 </h:head>
-<script>
-function goBack() {
-  window.history.back();
-}
-</script>
-<header>
-	<nav class="navbar navbar-expand-lg bg-gradient-light">
-		<div class="navbar-nav mr-auto">
-		<h3 class="d-flex justify-content-center" style="text-align: center;"><a onclick="goBack()">Pelubosque y Carátulas</a></h3>
-		</div>
-	</nav>
-</header>
 <h:body>
+	<br />
+	<h1 style="text-align:Center;">Crear nueva cita</h1>
+	<br />
+	<br />
 	<div class="container d-flex justify-content-center">
 	<h:form class="form">
 		<p:growl id="messages" showDetail="true" sticky="true"/>	
@@ -33,7 +25,6 @@ function goBack() {
 			<p:datePicker id="expDate" pattern="MM/yyyy" view="month" yearNavigator="true" yearRange="2020:2040" pt:placeholder="Fecha Expiración"/>
 			<p:inputNumber id="ccv" pt:placeholder="CCV"/>
 			<p:inputText id="owner" pt:placeholder="Titular de la tarjeta"/>
-			<p:commandButton id="oneMoreCard" icon="fas fa-plus"/>
 		</p:panelGrid>
 		<p:panelGrid columns="2" styleClass="ui-noborder">
 			<p:commandButton value="Registrar Cita"/>
@@ -42,18 +33,4 @@ function goBack() {
 	</div>
 	<br />
 </h:body>
-<footer class="bg-dark">
-	<nav class="navbar navbar-expand-lg">
-		<p style="color: white; text-align: center;">©2020 Pelubosque - Todos los derechos
-			reservados</p>
-		<ul class="navbar-nav ml-auto">
-			<li><i class="fab fa-cc-mastercard fa-2x px-1"
-				style="color: White;" /></li>
-			<li><i class="fab fa-cc-visa fa-2x px-1" style="color: White;" /></li>
-			<li><i class="fab fa-cc-amex fa-2x px-1" style="color: White;" /></li>
-			<li><i class="fas fa-money-bill-alt fa-2x px-1"
-				style="color: White;" /></li>
-		</ul>
-	</nav>
-</footer>
 </html>

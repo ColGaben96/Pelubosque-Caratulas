@@ -10,7 +10,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.mail.MessagingException;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +24,12 @@ import org.hibernate.cfg.Configuration;
 import co.edu.unbosque.model.util.DateMaker;
 import co.edu.unbosque.model.util.UserLocationMaker;
 
+/**
+ * Basically the master class. Without this, there is no project.
+ * @author Gabriel Blanco
+ * @version 1.0.0
+ *
+ */
 @ManagedBean(name="user")
 @SessionScoped
 @Entity
@@ -32,46 +37,46 @@ import co.edu.unbosque.model.util.UserLocationMaker;
 public class User {
 	
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id", nullable=false)
-	private int id;
-	@Column(name="role", nullable=false)
-	private int role;
-	@Column(name="name")
-	private String name;
+//	@Column(name="id", nullable=false)
 	@Id
-	@Column(name="username", nullable=false)
+	private int id;
+//	@Column(name="role", nullable=false)
+	private int role;
+//	@Column(name="name")
+	private String name;
+//	@Column(name="username", nullable=false)
 	private String username;
-	@Column(name="email")
+//	@Column(name="email")
 	private String email;
-	@Column(name="genre")
+//	@Column(name="genre")
 	private String genre;
-	@Column(name="password")
+//	@Column(name="password")
 	private String password;
-	@Column(name="address")
+//	@Column(name="address")
 	private String address;
 	private String nomenAddress;
 	private String town;
 	private String state;
-	@Column(name="phone")
+//	@Column(name="phone")
 	private String phone;
-	@Column(name="birthday")
+//	@Column(name="birthday")
 	private String birthday;
 	private Date birthdayForm;
-	@Column(name="toid")
+//	@Column(name="toid")
 	private String toid;
-	@Column(name="noid")
+//	@Column(name="noid")
 	private String noid;
-	@Column(name="sessionID", nullable = false)
+//	@Column(name="sessionID", nullable = false)
 	private String sessionID;
-	@Column(name="paymentMethod")
+//	@Column(name="paymentMethod")
 	private ArrayList<CreditCard> paymentMethod = new ArrayList<CreditCard>();
-	@Column(name="Appointments")
+//	@Column(name="Appointments")
 	private ArrayList<Appointments> Appointments = new ArrayList<Appointments>();
-	@Column(name="clients")
+//	@Column(name="clients")
 	private ArrayList<User> clients = new ArrayList<User>();
-	@Column(name="Active")
+//	@Column(name="Active")
 	private boolean active;
-	@Column(name="DoneRegistration")
+//	@Column(name="DoneRegistration")
 	private boolean doneRegistration;
 	private String cardnumber;
 	private String cardccv;
@@ -79,14 +84,38 @@ public class User {
 	private String cardFranchise;
 	private String cardexpDate;
 	private Date cardExpdateForm;
+	/**
+	 * Empty constructor
+	 * @author Gabriel Blanco
+	 */
 	public User() {
 		
 	}
 	
+	/**
+	 * Constructor to define a new user object.
+	 * @author Gabriel Blanco
+	 * @param role
+	 * @param name
+	 * @param username
+	 * @param email
+	 * @param genre
+	 * @param password
+	 * @param address
+	 * @param phone
+	 * @param birthday
+	 * @param toid
+	 * @param noid
+	 * @param paymentMethod
+	 * @param Appointments
+	 * @param clients
+	 * @param sessionID
+	 * @param active
+	 * @param doneRegistration
+	 */
 	public User(int role, String name, String username, String email, String genre, String password, String address, String phone,
 			String birthday, String toid, String noid, ArrayList<CreditCard> paymentMethod, ArrayList<Appointments> Appointments,
 			ArrayList<User> clients, String sessionID, boolean active, boolean doneRegistration) {
-		super();
 		this.role = role;
 		this.name = name;
 		this.username = username;
@@ -106,6 +135,10 @@ public class User {
 		this.doneRegistration = doneRegistration;
 	}
 	
+	/**
+	 * Checks user login and role type to load its functions.
+	 * @author Gabriel Blanco
+	 */
 	@SuppressWarnings("unchecked")
 	public void checkUser() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -165,33 +198,42 @@ public class User {
 	
 	@SuppressWarnings("unchecked")
 	public void checkAdmin() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpSession facesSession = (HttpSession) context.getExternalContext().getSession(true);
 		SessionFactory factory = new Configuration()
 				.configure()
-				.addAnnotatedClass(User.class)
 				.buildSessionFactory();
 		Session session = factory.getCurrentSession();
 		session.beginTransaction();
 		List<User> users = session.createQuery("from User").list();
 		for (int i = 0; i < users.size(); i++) {
 			if(!(username == users.get(i).getUsername()) && !(password == users.get(i).getPassword())) {
-				if(users.get(i).getRole() == 0) {
-					FacesContext context = FacesContext.getCurrentInstance();
-					HttpSession facesSession = (HttpSession) context.getExternalContext().getSession(true);
-					try 	{
-						context.getExternalContext().redirect("index.xhtml?sessionID="+users.get(i).getSessionID());
-						facesSession.setAttribute("username", name);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","Ha ocurrido un error inesperado.");
+				if(users.get(i).isDoneRegistration()) {
+					if(users.get(i).isActive()) {
+						if(users.get(i).getRole() == 0) {
+							try {
+								context.getExternalContext().redirect("index.xhtml?sessionID="+users.get(i).getSessionID());
+								facesSession.setAttribute("username", name);
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+								FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error","Ha ocurrido un error inesperado.");
+								FacesContext.getCurrentInstance().addMessage("badLogin", message);
+							}
+						}  else {
+							FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario y/o contraseña están errados. Por favor verifica e intenta nuevamente.",null);
+							FacesContext.getCurrentInstance().addMessage("badLogin", message);
+						}
+					} else {
+						FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario y/o contraseña están errados. Por favor verifica e intenta nuevamente.",null);
 						FacesContext.getCurrentInstance().addMessage("badLogin", message);
 					}
 				} else {
-					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","El usuario y/o contraseña están errados. Por favor verifica e intenta nuevamente.");
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario y/o contraseña están errados. Por favor verifica e intenta nuevamente.",null);
 					FacesContext.getCurrentInstance().addMessage("badLogin", message);
 				}
 			} else {
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cargando...","El usuario y/o contraseña están errados. Por favor verifica e intenta nuevamente.");
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario y/o contraseña están errados. Por favor verifica e intenta nuevamente.",null);
 				FacesContext.getCurrentInstance().addMessage("badLogin", message);
 			}
 		}
@@ -379,8 +421,48 @@ public class User {
 					+ "        <meta charset=\"UTF-8\">\n"
 					+ "    </head>\n"
 					+ "    <body>\n"
-					+ "        <h1>Hola "+name+"</h1><br>\n"
+					+ "        <h1>Hola "+users.get(0).getName()+"</h1><br>\n"
 					+ "        <p>Queremos informarte que activaste tu cuenta exitosamente y a partir de este momento ya puedes utilizar nuestros servicios.</p> <br>\n"
+					+ "        <p>Cualquier inconformidad puedes contactar a gblancol@unbosque.edu.co</p><br>\n"
+					+ "        <p>Quedamos atentos,</p><br>\n"
+					+ "        <p>El equipo de Pelubosque y Carátulas</p>\n"
+					+ "    </body>\n"
+					+ "</html>");
+			context.getExternalContext().redirect("../Aplicacion/index.xhtml?sessionID="+users.get(0).getSessionID());
+		} catch (IOException | MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		session.getTransaction().commit();
+		session.close();
+		factory.close();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void professionalDone() {
+		Emailer email = new Emailer();
+		FacesContext context = FacesContext.getCurrentInstance();
+		SessionFactory factory = new Configuration()
+				.configure()
+				.addAnnotatedClass(User.class)
+				.buildSessionFactory();
+		Session session = factory.getCurrentSession();	
+		session.beginTransaction();
+		List<User> users = session.createQuery("from User where sessionID = '"+sessionID+"'").list();
+		users.get(0).setDoneRegistration(true);
+		users.get(0).setActive(true);
+		users.get(0).setRole(2);
+		session.update(users.get(0));
+		try {
+			email.sendEmail(users.get(0).getEmail(), "Activaste tu cuenta", "<!DOCTYPE html>\n"
+					+ "<html>\n"
+					+ "    <head>\n"
+					+ "        <meta charset=\"UTF-8\">\n"
+					+ "    </head>\n"
+					+ "    <body>\n"
+					+ "        <h1>Hola "+users.get(0).getName()+"</h1><br>\n"
+					+ "        <p>Queremos informarte que activaste tu cuenta como cliente exitosamente y a partir de este momento ya puedes utilizar nuestros servicios.</p> <br>\n"
+					+ "        <p>En un momento verificaremos tu solicitud y pondremos las funciones correspondientes.</p><br>\n"
 					+ "        <p>Cualquier inconformidad puedes contactar a gblancol@unbosque.edu.co</p><br>\n"
 					+ "        <p>Quedamos atentos,</p><br>\n"
 					+ "        <p>El equipo de Pelubosque y Carátulas</p>\n"
@@ -404,6 +486,10 @@ public class User {
 				.buildSessionFactory();
 		HttpSession facesSession = (HttpSession) context.getExternalContext().getSession(true);
 		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		session.getTransaction().commit();
+		session.close();
+		factory.close();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -454,7 +540,7 @@ public class User {
 					+ "        <meta charset=\"UTF-8\">\n"
 					+ "    </head>\n"
 					+ "    <body>\n"
-					+ "        <h1>Hola "+name+"</h1><br>\n"
+					+ "        <h1>Hola "+users.get(0).getName()+"</h1><br>\n"
 					+ "        <p>Queremos informarte que desactivaste tu cuenta exitosamente. Por políticas internas no podemos eliminar los servicios que has utilizado. Ya que la Ley 1582 de 2012 ampara a ti y a nosotros, solo usaremos tus datos para los servicios utilizados anteriormente.</p> <br>\n"
 					+ "        <p>Cualquier inconformidad puedes contactar a gblancol@unbosque.edu.co</p><br>\n"
 					+ "        <p>Quedamos atentos,</p><br>\n"
@@ -537,6 +623,24 @@ public class User {
 			CreditCard newcc = new CreditCard(newNumber, cardccv, cardBelongsTo, CreditCard.VISA, new DateMaker().date2exp(cardExpdateForm));
 			users.get(0).getPaymentMethod().add(newcc);
 			session.update(users.get(0));
+			try {
+				emailer.sendEmail(email, "Registramos tu "+newNumber+" "+newcc.getFranchise()+" exitosamente", "<!DOCTYPE html>\n"
+						+ "<html>\n"
+						+ "    <head>\n"
+						+ "        <meta charset=\"UTF-8\">\n"
+						+ "    </head>\n"
+						+ "    <body>\n"
+						+ "        <h1>Hola "+name+"</h1><br>\n"
+						+ "        <p>Queremos informarte que desactivaste tu tarjeta "+newcc.getFranchise()+" "+newNumber+" ha sido registrada exitosamente.</p> <br>\n"
+						+ "        <p>Cualquier inconformidad puedes contactar a gblancol@unbosque.edu.co</p><br>\n"
+						+ "        <p>Quedamos atentos,</p><br>\n"
+						+ "        <p>El equipo de Pelubosque y Carátulas</p>\n"
+						+ "    </body>\n"
+						+ "</html>");
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		} else if(newCardNumber[0] == "5" && newCardNumber[1] == "1"
 				|| newCardNumber[0] == "5" && newCardNumber[1] == "2"
@@ -550,6 +654,24 @@ public class User {
 			CreditCard newcc = new CreditCard(newNumber, cardccv, cardBelongsTo, CreditCard.MASTERCARD, new DateMaker().date2exp(cardExpdateForm));
 			users.get(0).getPaymentMethod().add(newcc);
 			session.update(users.get(0));
+			try {
+				emailer.sendEmail(email, "Registramos tu "+newNumber+" "+newcc.getFranchise()+" exitosamente", "<!DOCTYPE html>\n"
+						+ "<html>\n"
+						+ "    <head>\n"
+						+ "        <meta charset=\"UTF-8\">\n"
+						+ "    </head>\n"
+						+ "    <body>\n"
+						+ "        <h1>Hola "+name+"</h1><br>\n"
+						+ "        <p>Queremos informarte que desactivaste tu tarjeta "+newcc.getFranchise()+" "+newNumber+" ha sido registrada exitosamente.</p> <br>\n"
+						+ "        <p>Cualquier inconformidad puedes contactar a gblancol@unbosque.edu.co</p><br>\n"
+						+ "        <p>Quedamos atentos,</p><br>\n"
+						+ "        <p>El equipo de Pelubosque y Carátulas</p>\n"
+						+ "    </body>\n"
+						+ "</html>");
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		} else {
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","La tarjeta no es válida");
@@ -680,11 +802,9 @@ public class User {
 	public String getSessionID() {
 		return sessionID;
 	}
-
 	public void setSessionID(String sessionID) {
 		this.sessionID = sessionID;
 	}
-
 	public void setRole(int role) {
 		this.role = role;
 	}
@@ -709,11 +829,9 @@ public class User {
 	public String getGenre() {
 		return genre;
 	}
-
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-
 	public String getPassword() {
 		return password;
 	}
@@ -762,99 +880,75 @@ public class User {
 	public void setClients(ArrayList<User> clients) {
 		this.clients = clients;
 	}
-
 	public String getNomenAddress() {
 		return nomenAddress;
 	}
-
 	public void setNomenAddress(String nomenAddress) {
 		this.nomenAddress = nomenAddress;
 	}
-
 	public String getTown() {
 		return town;
 	}
-
 	public void setTown(String town) {
 		this.town = town;
 	}
-
 	public String getState() {
 		return state;
 	}
-
 	public void setState(String state) {
 		this.state = state;
 	}
-
 	public boolean isActive() {
 		return active;
 	}
-
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-
 	public boolean isDoneRegistration() {
 		return doneRegistration;
 	}
-
 	public void setDoneRegistration(boolean doneRegistration) {
 		this.doneRegistration = doneRegistration;
 	}
-
 	public String getCardnumber() {
 		return cardnumber;
 	}
-
 	public void setCardnumber(String cardnumber) {
 		this.cardnumber = cardnumber;
 	}
-
 	public String getCardccv() {
 		return cardccv;
 	}
-
 	public void setCardccv(String cardccv) {
 		this.cardccv = cardccv;
 	}
-
 	public String getCardBelongsTo() {
 		return cardBelongsTo;
 	}
-
 	public void setCardBelongsTo(String cardBelongsTo) {
 		this.cardBelongsTo = cardBelongsTo;
 	}
-
 	public String getCardFranchise() {
 		return cardFranchise;
 	}
-
 	public void setCardFranchise(String cardFranchise) {
 		this.cardFranchise = cardFranchise;
 	}
-
 	public String getCardexpDate() {
 		return cardexpDate;
 	}
-
 	public void setCardexpDate(String cardexpDate) {
 		this.cardexpDate = cardexpDate;
 	}
-
 	public Date getBirthdayForm() {
 		return birthdayForm;
 	}
-
 	public void setBirthdayForm(Date birthdayForm) {
 		this.birthdayForm = birthdayForm;
 	}
-
 	public Date getCardExpdateForm() {
 		return cardExpdateForm;
 	}
-
 	public void setCardExpdateForm(Date cardExpdateForm) {
 		this.cardExpdateForm = cardExpdateForm;
 	}

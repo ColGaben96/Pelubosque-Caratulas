@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
 
+import co.edu.unbosque.model.Appointments;
+import co.edu.unbosque.model.CreditCard;
+import co.edu.unbosque.model.Locations;
 import co.edu.unbosque.model.User;
 
 @ManagedBean(name="db")
@@ -74,7 +77,26 @@ public class DatabaseConnection {
 		return msg;
 	}
 	
-	public ArrayList<String> getLOCATIONS() {
+	public ArrayList<Locations> getLOCATIONS() {
+		var msg = new ArrayList<Locations>();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String user = "ImmnUr2vPP";
+			String pass = "MLSgcm7woJ";
+			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			statement = con.createStatement();
+			rs = statement.executeQuery("SELECT * FROM Location");
+			while(rs.next()) {
+				msg.add(new Locations(rs.getString(1), rs.getString(3), rs.getInt(2), rs.getInt(5)));
+			}
+			con.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}
+	
+	public ArrayList<String> getLOCATIONNAMES() {
 		var msg = new ArrayList<String>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -84,7 +106,7 @@ public class DatabaseConnection {
 			statement = con.createStatement();
 			rs = statement.executeQuery("SELECT * FROM Location");
 			while(rs.next()) {
-				msg.add(rs.getString(2));
+				msg.add(rs.getString(1));
 			}
 			con.close();
 		} catch (SQLException | ClassNotFoundException e) {
@@ -169,6 +191,64 @@ public class DatabaseConnection {
 		return msg;
 	}
 	
+	public ArrayList<CreditCard> getAllPayments(String sessionID) {
+		var msg = new ArrayList<CreditCard>();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String user = "ImmnUr2vPP";
+			String pass = "MLSgcm7woJ";
+			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			statement = con.createStatement();
+			rs = statement.executeQuery("SELECT * FROM `Users` WHERE state = '"+sessionID+"'");
+			while(rs.next()) {
+				msg.add(new CreditCard());
+			}
+			con.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}
+	
+	public ArrayList<Appointments> getAllAppointments(String sessionID) {
+		var msg = new ArrayList<Appointments>();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String user = "ImmnUr2vPP";
+			String pass = "MLSgcm7woJ";
+			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			statement = con.createStatement();
+			rs = statement.executeQuery("SELECT * FROM `Users` WHERE state = '"+sessionID+"'");
+			while(rs.next()) {
+				msg.add(new Appointments());
+			}
+			con.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}
+	
+	public ArrayList<User> getAllClients(String sessionID) {
+		var msg = new ArrayList<User>();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String user = "ImmnUr2vPP";
+			String pass = "MLSgcm7woJ";
+			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			statement = con.createStatement();
+			rs = statement.executeQuery("SELECT * FROM `Users`");
+			while(rs.next()) {
+				//msg.add(rs.geto)
+			}
+			con.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}
+	
+	@Deprecated
 	public void updateUserAddress(User userobj, String address) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

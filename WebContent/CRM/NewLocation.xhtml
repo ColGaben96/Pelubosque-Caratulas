@@ -14,20 +14,19 @@
 </h:head>
 <h:body>
 	<br />
-	<h1 style="text-align:Center;">Crear nueva forma de pago</h1>
+	<h1 style="text-align:Center;">Crear nuevo punto</h1>
 	<br />
 	<br />
 	<div class="container d-flex justify-content-center">
 	<h:form class="form">
 		<p:growl id="messages" showDetail="true" sticky="true"/>	
-		<p:panelGrid style="border:none;" columns="4" cellpadding="5" styleClass="ui-noborder">
-			<p:inputNumber id="cardCheck" thousandSeparator="" decimalPlaces="0" pt:placeholder="Num Tarjeta"/>
-			<p:datePicker id="expDate" pattern="MM/yyyy" view="month" yearNavigator="true" yearRange="2020:2040" pt:placeholder="Fecha Expiración"/>
-			<p:inputNumber id="ccv" pt:placeholder="CCV"/>
-			<p:inputText id="owner" pt:placeholder="Titular de la tarjeta"/>
+		<p:panelGrid style="border:none;" columns="1" cellpadding="5" styleClass="ui-noborder">
+			<p:inputText pt:placeholder="Nombre" value="#{locations.name}"/>
+			<p:inputText pt:placeholder="Dirección" value="#{locations.address}"/>
+			<p:inputNumber pt:placeholder="Máxima Capacidad" value="#{locations.maxCapacity}"/>
 		</p:panelGrid>
 		<p:panelGrid columns="2" styleClass="ui-noborder">
-			<p:commandButton value="Registrar Tarjeta"/>
+			<p:commandButton value="Registrar Punto" action="#{locations.createLocation()}"/>
 		</p:panelGrid>
 	</h:form>
 	</div>

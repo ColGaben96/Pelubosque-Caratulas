@@ -5,6 +5,7 @@
 		<class>co.edu.unbosque.model.Locations</class>
 		<class>co.edu.unbosque.model.divipola.States</class>
 		<class>co.edu.unbosque.model.divipola.Towns</class>
+		<class>co.edu.unbosque.model.Appointments</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://remotemysql.com:3306/ImmnUr2vPP"/>
 			<property name="javax.persistence.jdbc.user" value="ImmnUr2vPP"/>
