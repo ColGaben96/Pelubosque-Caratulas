@@ -27,16 +27,17 @@
 	<br />
 	<h1 style="text-align: center;">Crear una cuenta</h1>
 	<br />
-	<div class="container d-flex justify-content-center">
+	<h:form><div class="container d-flex justify-content-center">
 		<p:panelGrid columns="1" styleClass="ui-noborder">
 			<div class="card-img-top d-flex justify-content-center">
 				<i class="fas fa-check-circle fa-8x" style="color: Green" />
 			</div>
 			<h2 style="text-align: center;">¡Gracias #{username}!</h2>
 			<p style="text-align: center;">Terminaste de manera satisfactoria tu registro.</p>
-			<p:commandButton value="Haz click aquí para acceder a tu cuenta" onfocus="#{user.doneRegistration()}"/>
+			<p:commandButton value="Haz click aquí para acceder a tu cuenta" action="#{user.doneRegistration()}"/>
 		</p:panelGrid>
 	</div>
+	</h:form>
 	<br />
 </h:body>
 <footer class="bg-dark fixed-bottom">
