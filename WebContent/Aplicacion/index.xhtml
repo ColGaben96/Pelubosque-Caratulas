@@ -40,12 +40,14 @@
 		<br />
 		<p:panelGrid columns="1" styleClass="ui-noborder" id="userPanel" rendered="#{userRole}">
 			<p><a href="Account.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-user-edit"/> Mi Cuenta</a></p>
+			<p><a href="index.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-history"/> Historial</a></p>
 			<p><a href="Payments.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-credit-card"/> Mis Medios de Pago</a></p>
 			<p><a href="Appointments.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-calendar-alt"/> Mis Citas</a></p>
 			<p><a href="../index.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-door-open"/> Cerrar Sesion</a></p>
 		</p:panelGrid>
 		<p:panelGrid columns="1" styleClass="ui-noborder" id="professionalPanel" rendered="#{professionalRole}">
 			<p><a href="Account.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-user-edit"/> Mi Cuenta</a></p>
+			<p><a href="index.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-history"/> Historial</a></p>
 			<p><a href="Payments.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-credit-card"/> Mis Medios de Pago</a></p>
 			<p><a href="Appointments.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-calendar-alt"/> Mis Citas</a></p>
 			<p><a href="Clients.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-users"/> Mis Clientes</a></p>
