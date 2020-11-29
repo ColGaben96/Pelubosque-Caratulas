@@ -58,7 +58,27 @@ public class DatabaseConnection {
 		return msg;
 	}
 	
-	public ArrayList<String> getUSERS() {
+	@Deprecated
+	public ArrayList<User> getUSER() {
+		var msg = new ArrayList<User>();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String user = "ImmnUr2vPP";
+			String pass = "MLSgcm7woJ";
+			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			statement = con.createStatement();
+			rs = statement.executeQuery("SELECT * FROM User");
+			while(rs.next()) {
+				msg.add(new User());
+			}
+			con.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}
+	
+	public ArrayList<String> getUSERNAMES() {
 		var msg = new ArrayList<String>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

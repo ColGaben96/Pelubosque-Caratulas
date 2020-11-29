@@ -12,15 +12,14 @@
 	<h:outputScript library="js" name="bootstrap.js" />
 	<script src="https://kit.fontawesome.com/302a1eb3e6.js" />
 </h:head>
-<script>
-function goBack() {
-  window.history.back();
-}
-</script>
 <header>
 	<nav class="navbar navbar-expand-lg bg-gradient-light">
 		<div class="navbar-nav mr-auto">
-		<h3 class="d-flex justify-content-center" style="text-align: center;"><a onclick="goBack()">Pelubosque y Carátulas</a></h3>
+		<a onclick="PF('sidebarOperations').show()"><i class="fas fa-bars"/></a>
+		<h3 class="d-flex justify-content-center" style="text-align: center;"><a>Pelubosque y Carátulas</a></h3>
+		</div>
+		<div class="navbar-nav ml-auto">
+		<h3 style="text-align: center;"><a onclick="PF('sidebarOperations').show()"><i class="fas fa-user-circle fa-3x"/></a></h3>
 		</div>
 	</nav>
 </header>
@@ -29,20 +28,49 @@ function goBack() {
 		<c:viewParam name="sessionID" value="#{user.sessionID}"></c:viewParam>
 	</c:metadata>
 	<p>#{user.validateSessionID()}</p>
+	<p>#{user.checkPermissions()}</p>
+	<c:attribute name="userRole" value="#{user.checkPermissions()}"/>
+	<c:attribute name="professionalRole" value="#{user.checkPermissions()}"/>
+	<p:sidebar widgetVar="sidebarOperations" baseZIndex="10000">
+		<br />
+		<h1 style="text-align: center;"><i class="fas fa-user-circle fa-3x"/></h1>
+		<c:attribute name="username" value="#{user.name}"/>
+		<h3 style="text-align: center;">#{username}</h3>
+		<p style="text-align: center;" class="text-muted">¿Qué quieres hacer hoy?</p>
+		<br />
+		<p:panelGrid columns="1" styleClass="ui-noborder" id="userPanel" rendered="#{userRole}">
+			<p><a href="Account.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-user-edit"/> Mi Cuenta</a></p>
+			<p><a href="Payments.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-credit-card"/> Mis Medios de Pago</a></p>
+			<p><a href="Appointments.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-calendar-alt"/> Mis Citas</a></p>
+			<p><a href="../index.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-door-open"/> Cerrar Sesion</a></p>
+		</p:panelGrid>
+		<p:panelGrid columns="1" styleClass="ui-noborder" id="professionalPanel" rendered="#{professionalRole}">
+			<p><a href="Account.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-user-edit"/> Mi Cuenta</a></p>
+			<p><a href="Payments.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-credit-card"/> Mis Medios de Pago</a></p>
+			<p><a href="Appointments.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-calendar-alt"/> Mis Citas</a></p>
+			<p><a href="Clients.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-users"/> Mis Clientes</a></p>
+			<p><a href="Assigned.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-calendar-check"/> Mis Citas Asignadas</a></p>
+			<p><a href="PaymentCollection.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-piggy-bank"/> Mis Recaudos</a></p>
+			<p><a href="../index.xhtml" style="color: Black;"><i class="fas fa-door-open"/> Cerrar Sesion</a></p>
+		</p:panelGrid>
+	</p:sidebar>
 	<div class="container d-flex justify-content-center">
-	<h:form class="form">
-		<p:growl id="messages" showDetail="true" sticky="true"/>	
-		<p:panelGrid style="border:none;" columns="4" cellpadding="5" styleClass="ui-noborder">
-			<p:inputText id="cardCheck" pt:placeholder="Num Tarjeta" value="#{user.cardnumber}"/>
-			<p:datePicker id="expDate" pattern="MM/yyyy" view="month" yearNavigator="true" yearRange="2020:2040" pt:placeholder="Fecha Expiración" value="#{user.cardExpdateForm}"/>
-			<p:inputText thousandSeparator="" id="ccv" pt:placeholder="CCV" value="#{user.cardccv}"/>
-			<p:inputText id="owner" pt:placeholder="Titular de la tarjeta" value="#{user.cardBelongsTo}"/>
-		</p:panelGrid>
 		<p:panelGrid columns="2" styleClass="ui-noborder">
-			<p:linkButton value="Cancelar" href="../Aplicacion/index.xhtml?sessionID=#{sessionID}"/>
-			<p:commandButton value="Inscribir Tarjeta" update="messages" action="#{user.newUserCard()}"/>
+			<p:commandButton icon="fas fa-pencil-alt" value="Crear Cita"/>
+			<p:commandButton icon="fas fa-coins" value="Ver Pagos Pendientes"/>
 		</p:panelGrid>
-	</h:form>
+	</div>
+	<div class="container">
+		<br />
+		<h1>Historial</h1>
+		<p:dataTable var="appointments" value="server.db.getuserappointments">
+			<p:column headerText="Fecha"></p:column>
+			<p:column headerText="Profesional"></p:column>
+			<p:column headerText="Valor"></p:column>
+			<p:column headerText="Lugar"></p:column>
+			<p:column headerText="Forma de Pago"></p:column>
+			<p:column headerText="Estado"></p:column>
+		</p:dataTable>
 	</div>
 	<br />
 </h:body>

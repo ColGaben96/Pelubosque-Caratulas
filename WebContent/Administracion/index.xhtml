@@ -51,15 +51,12 @@
 	<div class="container d-flex justify-content-center">
 		<p:panelGrid columns="4" styleClass="ui-noborder">
 			<p:commandButton icon="fas fa-plus" value=" Agregar Punto" onclick="PF('newLocation').show()"/>
-			<p:commandButton icon="fas fa-file-download" value=" Descargar Reporte"/>
-			<p:commandButton icon="fas fa-file-contract" value="Solicitudes"/>
-			<p:commandButton icon="fas fa-users" value=". Clientes"/>
 		</p:panelGrid>
 	</div>
 	<div class="container">
 		<br />
 		<h1>Puntos</h1>
-		<p:dataTable var="myLocations" styleClass="table table-striped table-bordered" value="#{server.db.getLOCATIONS()}" rows="5" paginator="true">
+		<p:dataTable var="myLocations" styleClass="table table-striped table-bordered" value="#{server.db.getLOCATIONS()}" rows="50" paginator="true">
 			<p:column headerText="Sede">
 				<h:outputText value="#{myLocations.name}"/>
 			</p:column>
