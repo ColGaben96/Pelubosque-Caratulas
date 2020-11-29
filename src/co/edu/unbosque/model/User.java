@@ -320,6 +320,21 @@ public class User {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<User> listUsers() {
+		SessionFactory factory = new Configuration()
+				.configure()
+				.addAnnotatedClass(User.class)
+				.buildSessionFactory();
+		Session session = factory.getCurrentSession();	
+		session.beginTransaction();
+		List<User> users = session.createQuery("from User").list();
+		session.getTransaction().commit();
+		session.close();
+		factory.close();
+		return users;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public void updateSessionID() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		SessionFactory factory = new Configuration()

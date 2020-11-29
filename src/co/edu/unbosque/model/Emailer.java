@@ -1,15 +1,21 @@
 package co.edu.unbosque.model;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
 
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 /**
  *  * @author Gabriel Blanco
  * @version 1.0
@@ -53,6 +59,24 @@ public class Emailer {
 		message.setContent(
 	              htmlContent,
 	             "text/html");
+		Transport.send(message);
+		System.out.println("Message sent");
+	}
+	
+	public void sendEmailWithAttachments(String emailTO, String subject, Object htmlContent, File attachments) throws AddressException, MessagingException, IOException {
+		MimeMessage message=new MimeMessage(getSessionObject());
+		Multipart multipart = new MimeMultipart();
+		BodyPart content = new MimeBodyPart();
+		message.setFrom(new InternetAddress("Pelubosque"));
+		System.out.println("Wait");
+		message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailTO));
+		message.setSubject(subject);
+		content.setContent(htmlContent, "text/html");
+		multipart.addBodyPart(content);
+		MimeBodyPart attachment = new MimeBodyPart();
+		attachment.attachFile(attachments);
+		multipart.addBodyPart(attachment);
+		message.setContent(multipart);
 		Transport.send(message);
 		System.out.println("Message sent");
 	}
