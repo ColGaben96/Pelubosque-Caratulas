@@ -24,19 +24,23 @@
 	</nav>
 </header>
 <h:body>
+<c:metadata>
+		<c:viewParam name="sessionID" value="#{user.sessionID}"></c:viewParam>
+	</c:metadata>
+	<p>#{user.validateSessionID()}</p>
 	<p:sidebar widgetVar="sidebarOperations" baseZIndex="10000">
 		<br />
 		<h1 style="text-align: center;"><i class="fas fa-user-circle fa-3x"/></h1>
-		<h3 style="text-align: center;">#{nombreUsuario}</h3>
+		<h3 style="text-align: center;">#{username}</h3>
 		<p style="text-align: center;" class="text-muted">¿Qué quieres hacer hoy?</p>
 		<br />
 		<p:panelGrid columns="1" styleClass="ui-noborder" id="userPanel" rendered="true">
-			<p><a><i class="fas fa-user-edit"/> Mi Cuenta</a></p>
-			<p><a><i class="fas fa-store"/> Puntos</a></p>
-			<p><a><i class="fas fa-file-contract"/> Solicitudes Pendientes</a></p>
-			<p><a><i class="fas fa-chart-line"/> Estadísticas</a></p>
-			<p><a><i class="fas fa-users"/> Clientes</a></p>
-			<p><a><i class="fas fa-door-open"/> Cerrar Sesion</a></p>
+			<p><a href="Account.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-user-edit"/> Mi Cuenta</a></p>
+			<p><a href="index.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-store"/> Puntos</a></p>
+			<p><a href="Requests.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-file-contract"/> Solicitudes Pendientes</a></p>
+			<p><a href="Statics.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-chart-line"/> Estadísticas</a></p>
+			<p><a href="Clients.xhtml?sessionID=#{user.sessionID}" style="color: Black;"><i class="fas fa-users"/> Clientes</a></p>
+			<p><a href="../index.xhtml" style="color: Black;"><i class="fas fa-door-open"/> Cerrar Sesion</a></p>
 		</p:panelGrid>
 	</p:sidebar>
 	<div class="container d-flex justify-content-center">
@@ -49,12 +53,7 @@
 	<div class="container">
 		<br />
 		<h1>Estadísticas</h1>
-		<p:dataTable var="appointments" value="server.db.getuserappointments">
-			<p:column headerText="Sede"></p:column>
-			<p:column headerText="Ubicación"></p:column>
-			<p:column headerText="Aforo"></p:column>
-			<p:column headerText="Detalle"></p:column>
-		</p:dataTable>
+		<p:barChart/>
 	</div>
 	<br />
 </h:body>

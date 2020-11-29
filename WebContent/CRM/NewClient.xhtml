@@ -14,7 +14,7 @@
 </h:head>
 <h:body>
 	<br />
-	<h1 style="text-align:Center;">Crear nueva forma de pago</h1>
+	<h1 style="text-align:Center;">Crear nuevo usuario</h1>
 	<br />
 	<br />
 	<div class="container d-flex justify-content-center">
@@ -25,9 +25,10 @@
 			<p:datePicker id="expDate" pattern="MM/yyyy" view="month" yearNavigator="true" yearRange="2020:2040" pt:placeholder="Fecha Expiración"/>
 			<p:inputNumber id="ccv" pt:placeholder="CCV"/>
 			<p:inputText id="owner" pt:placeholder="Titular de la tarjeta"/>
+			<p:commandButton id="oneMoreCard" icon="fas fa-plus"/>
 		</p:panelGrid>
 		<p:panelGrid columns="2" styleClass="ui-noborder">
-			<p:commandButton value="Registrar Tarjeta"/>
+			<p:commandButton value="Registrar Cita"/>
 		</p:panelGrid>
 	</h:form>
 	</div>

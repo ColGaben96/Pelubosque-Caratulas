@@ -47,7 +47,7 @@
 		<url-pattern>/faces/*</url-pattern>
 	</servlet-mapping>
 	<session-config>
-		<session-timeout>120</session-timeout>
+		<session-timeout>1</session-timeout>
 	</session-config>
 	<context-param>
 		<description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>

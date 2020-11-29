@@ -38,7 +38,7 @@
 			<p:autoComplete scrollHeight="150" cache="true" forceSelection="true" size="30" active="true" autoHighlight="true" emptyMessage="Cargando..." autocomplete="true" autoSelection="true" pt:placeholder="Municipio" value="#{user.town}" completeMethod="#{userlocation.getTowns()}"/>
 			<p:inputText name="address" id="address" pt:placeholder="Dirección" value="#{user.nomenAddress}" dropdown="true" forceSelection="true"/>
 			<p:selectCheckboxMenu id="preferredSede" pt:placeholder="Sedes Preferidas" label="Sede Preferida" multiple="false" style="width:170px">
-					<c:selectItems value="#{server.db.getLOCATIONS()}"/>
+					<c:selectItems value="#{server.db.getLOCATIONNAMES()}"/>
 			</p:selectCheckboxMenu>
 			<p:commandButton value="Siguiente" action="#{user.newUserUploadAddress()}"></p:commandButton>
 		</p:panelGrid>
