@@ -334,6 +334,20 @@ public class User {
 		return users;
 	}
 	
+	public int userQuantity() {
+		SessionFactory factory = new Configuration()
+				.configure()
+				.addAnnotatedClass(User.class)
+				.buildSessionFactory();
+		Session session = factory.getCurrentSession();	
+		session.beginTransaction();
+		int users = session.createQuery("from User").list().size();
+		session.getTransaction().commit();
+		session.close();
+		factory.close();
+		return users;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public void updateSessionID() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -703,6 +717,25 @@ public class User {
 		session.getTransaction().begin();
 		session.close();
 		factory.close();
+	}
+	
+	public ArrayList<String> listProfessional() {
+		SessionFactory factory = new Configuration()
+				.configure()
+				.addAnnotatedClass(User.class)
+				.buildSessionFactory();
+		Session session = factory.getCurrentSession();	
+		session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<User> users = session.createQuery("from User WHERE role = 2").list();
+		ArrayList<String> pro = new ArrayList<>();
+		for (int i = 0; i < users.size(); i++) {
+			pro.add(users.get(i).getName());
+		}
+		session.getTransaction().commit();
+		session.close();
+		factory.close();
+		return pro;
 	}
 	
 	@SuppressWarnings("unchecked")

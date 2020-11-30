@@ -86,6 +86,19 @@ public class Locations {
 		return locationList;
 	}
 	
+	public int locationQuantity() {
+		SessionFactory factory = new Configuration()
+				.configure()
+				.addAnnotatedClass(Locations.class)
+				.buildSessionFactory();
+		Session session = factory.getCurrentSession();
+		session.beginTransaction();
+		var locationList = session.createQuery("from Locations").list().size();
+		session.getTransaction().commit();
+		session.close();
+		return locationList;
+	}
+	
 	public void createLocation() {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cargando...",null);
 		FacesMessage Ready = new FacesMessage(FacesMessage.SEVERITY_INFO, "Punto agregado",null);
