@@ -56,10 +56,14 @@
 			<p><a href="../index.xhtml" style="color: Black;"><i class="fas fa-door-open"/> Cerrar Sesion</a></p>
 		</p:panelGrid>
 	</p:sidebar>
+	<p:sidebar widgetVar="newAppointmentCreation" baseZIndex="10000" fullScreen="true">
+		<div class="container">
+			<iframe src="../CRM/NewAppointment.xhtml" width="100%" height="600" style="border:none;"/>
+		</div>
+	</p:sidebar>
 	<div class="container d-flex justify-content-center">
 		<p:panelGrid columns="2" styleClass="ui-noborder">
-			<p:commandButton icon="fas fa-pencil-alt" value="Crear Cita"/>
-			<p:commandButton icon="fas fa-coins" value="Ver Pagos Pendientes"/>
+			<p:commandButton icon="fas fa-pencil-alt" value="Crear Cita" onclick="PF('newAppointmentCreation').show()"/>
 		</p:panelGrid>
 	</div>
 	<div class="container">

@@ -21,13 +21,13 @@
 	<h:form class="form">
 		<p:growl id="messages" showDetail="true" sticky="true"/>	
 		<p:panelGrid style="border:none;" columns="4" cellpadding="5" styleClass="ui-noborder">
-			<p:inputNumber id="cardCheck" thousandSeparator="" decimalPlaces="0" pt:placeholder="Num Tarjeta"/>
-			<p:datePicker id="expDate" pattern="MM/yyyy" view="month" yearNavigator="true" yearRange="2020:2040" pt:placeholder="Fecha Expiración"/>
-			<p:inputNumber id="ccv" pt:placeholder="CCV"/>
-			<p:inputText id="owner" pt:placeholder="Titular de la tarjeta"/>
+			<p:inputText id="cardCheck" pt:placeholder="Num Tarjeta" value="#{user.cardnumber}"/>
+			<p:datePicker id="expDate" pattern="MM/yyyy" view="month" yearNavigator="true" yearRange="2020:2040" pt:placeholder="Fecha Expiración" value="#{user.cardExpdateForm}"/>
+			<p:inputText thousandSeparator="" id="ccv" pt:placeholder="CCV" value="#{user.cardccv}"/>
+			<p:inputText id="owner" pt:placeholder="Titular de la tarjeta" value="#{user.cardBelongsTo}"/>
 		</p:panelGrid>
 		<p:panelGrid columns="2" styleClass="ui-noborder">
-			<p:commandButton value="Registrar Tarjeta"/>
+			<p:commandButton value="Registrar Tarjeta" action="#{user.newUserCard()}"/>
 		</p:panelGrid>
 	</h:form>
 	</div>

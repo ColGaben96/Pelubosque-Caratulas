@@ -65,10 +65,13 @@
 	<div class="container">
 		<br />
 		<h1>Mis Clientes</h1>
-		<p:dataTable var="appointments" value="server.db.getappointmentclients">
-			<p:column headerText="Nombre"></p:column>
-			<p:column headerText="Contacto"></p:column>
-			<p:column headerText="Ultima vez atendido"></p:column>
+		<p:dataTable var="asappointmnts" value="#{user.getAssignedAppointments()}">
+			<p:column headerText="Nombre">
+				<h:outputText value="#{asappointmnts.client}"/>
+			</p:column>
+			<p:column headerText="Contacto">
+				<h:outputText value="#{asappointmnts.email}"/>
+			</p:column>
 		</p:dataTable>
 	</div>
 	<br />
