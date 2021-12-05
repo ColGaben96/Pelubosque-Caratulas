@@ -13,7 +13,7 @@
 		<property name="show_sql">true</property>
 		<!-- Set the current session context -->
 		<property name="current_session_context_class">thread</property>
-		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.hbm2ddl.auto">create</property>
 		<!-- Set mapping of user -->
 		<mapping class="co.edu.unbosque.model.User"/>
 		<mapping class="co.edu.unbosque.model.Locations"/>
