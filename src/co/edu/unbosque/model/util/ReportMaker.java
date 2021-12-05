@@ -173,7 +173,7 @@ public class ReportMaker {
 			content.moveTextPositionByAmount(10, 650);
 			//content.setFont(segoeUIl, 12);
 			content.setFont(font, 12);
-			content.showText("Estos son los números hasta el momento:");
+			content.showText("Estos son los nÃºmeros hasta el momento:");
 			content.endText();
 			content.beginText();
 			content.moveTextPositionByAmount(10, 630);
@@ -216,7 +216,7 @@ public class ReportMaker {
 							+ "        <meta charset=\"UTF-8\">\n"
 							+ "    </head>\n"
 							+ "    <body>\n"
-							+ "        <p>Aqui está el reporte que solicitaste. <br>\n"
+							+ "        <p>Aqui estÃ¡ el reporte que solicitaste. <br>\n"
 							+ "    </body>\n"
 							+ "</html>", 
 					new File(output + "/" + dformat.format(date) + ".pdf"));

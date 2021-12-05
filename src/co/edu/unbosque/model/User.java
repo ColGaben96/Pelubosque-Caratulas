@@ -172,7 +172,7 @@ public class User {
 								FacesContext.getCurrentInstance().addMessage("badLogin", message);
 							}
 						} else {
-							FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario y/o contraseña están errados. Por favor verifica e intenta nuevamente.",null);
+							FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario y/o contraseÃ±a estÃ¡n errados. Por favor verifica e intenta nuevamente.",null);
 							FacesContext.getCurrentInstance().addMessage("badLogin", message);
 						}
 					} else {
@@ -187,7 +187,7 @@ public class User {
 					}
 				}
 			} else {
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario y/o contraseña están errados. Por favor verifica e intenta nuevamente.",null);
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario y/o contraseÃ±a estÃ¡n errados. Por favor verifica e intenta nuevamente.",null);
 				FacesContext.getCurrentInstance().addMessage("badLogin", message);
 			}
 		}
@@ -221,19 +221,19 @@ public class User {
 								FacesContext.getCurrentInstance().addMessage("badLogin", message);
 							}
 						}  else {
-							FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario y/o contraseña están errados. Por favor verifica e intenta nuevamente.",null);
+							FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario y/o contraseÃ±a estÃ¡n errados. Por favor verifica e intenta nuevamente.",null);
 							FacesContext.getCurrentInstance().addMessage("badLogin", message);
 						}
 					} else {
-						FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario y/o contraseña están errados. Por favor verifica e intenta nuevamente.",null);
+						FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario y/o contraseÃ±a estÃ¡n errados. Por favor verifica e intenta nuevamente.",null);
 						FacesContext.getCurrentInstance().addMessage("badLogin", message);
 					}
 				} else {
-					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario y/o contraseña están errados. Por favor verifica e intenta nuevamente.",null);
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario y/o contraseÃ±a estÃ¡n errados. Por favor verifica e intenta nuevamente.",null);
 					FacesContext.getCurrentInstance().addMessage("badLogin", message);
 				}
 			} else {
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario y/o contraseña están errados. Por favor verifica e intenta nuevamente.",null);
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario y/o contraseÃ±a estÃ¡n errados. Por favor verifica e intenta nuevamente.",null);
 				FacesContext.getCurrentInstance().addMessage("badLogin", message);
 			}
 		}
@@ -267,11 +267,11 @@ public class User {
 						+ "    </head>\n"
 						+ "    <body>\n"
 						+ "        <h1>Hola "+name+"</h1><br>\n"
-						+ "        <p>En nombre del equipo de Pelubosque te damos la mas cordial bienvenida al servicio mas grande de diseño de imagen del pais. <br>\n"
-						+ "        Haz <a href=\"http://localhost:8080/PelubosqueCaratulas/faces/signup/continue.xhtml/?sessionID="+sessionID+"\">clic aquí</a> o ingresa a este link: http://localhost:8080/PelubosqueCaratulas/faces/signup/continue.xhtml?sessionID="+sessionID+"</p><br>\n"
+						+ "        <p>En nombre del equipo de Pelubosque te damos la mas cordial bienvenida al servicio mas grande de diseÃ±o de imagen del pais. <br>\n"
+						+ "        Haz <a href=\"http://localhost:8080/PelubosqueCaratulas/faces/signup/continue.xhtml/?sessionID="+sessionID+"\">clic aquÃ­</a> o ingresa a este link: http://localhost:8080/PelubosqueCaratulas/faces/signup/continue.xhtml?sessionID="+sessionID+"</p><br>\n"
 						+ "        <p>Recuerda que no hay personas feas, sino mal arregladas.</p> <br>\n"
 						+ "        <p>Quedamos atentos,</p><br>\n"
-						+ "        <p>El equipo de Pelubosque y Carátulas</p>\n"
+						+ "        <p>El equipo de Pelubosque y CarÃ¡tulas</p>\n"
 						+ "    </body>\n"
 						+ "</html>");
 			}
@@ -283,11 +283,11 @@ public class User {
 						+ "    </head>\n"
 						+ "    <body>\n"
 						+ "        <h1>Hola "+name+"</h1><br>\n"
-						+ "        <p>En nombre del equipo de Pelubosque te damos la mas cordial bienvenida al servicio mas grande de diseño de imagen del pais. <br>\n"
-						+ "        Haz <a href=\"http://localhost:8080/PelubosqueCaratulas/faces/signup/continue.xhtml/?sessionID="+sessionID+"\">clic aquí</a> o ingresa a este link: http://localhost:8080/PelubosqueCaratulas/faces/signup/continue.xhtml?sessionID="+sessionID+"</p><br>\n"
+						+ "        <p>En nombre del equipo de Pelubosque te damos la mas cordial bienvenida al servicio mas grande de diseÃ±o de imagen del pais. <br>\n"
+						+ "        Haz <a href=\"http://localhost:8080/PelubosqueCaratulas/faces/signup/continue.xhtml/?sessionID="+sessionID+"\">clic aquÃ­</a> o ingresa a este link: http://localhost:8080/PelubosqueCaratulas/faces/signup/continue.xhtml?sessionID="+sessionID+"</p><br>\n"
 						+ "        <p>Recuerda que no hay personas feas, sino mal arregladas.</p> <br>\n"
 						+ "        <p>Quedamos atentos,</p><br>\n"
-						+ "        <p>El equipo de Pelubosque y Carátulas</p>\n"
+						+ "        <p>El equipo de Pelubosque y CarÃ¡tulas</p>\n"
 						+ "    </body>\n"
 						+ "</html>");
 			}
@@ -299,11 +299,11 @@ public class User {
 						+ "    </head>\n"
 						+ "    <body>\n"
 						+ "        <h1>Hola "+name+"</h1><br>\n"
-						+ "        <p>En nombre del equipo de Pelubosque te damos la mas cordial bienvenida al servicio mas grande de diseño de imagen del pais. <br>\n"
-						+ "        Haz <a href=\"http://localhost:8080/PelubosqueCaratulas/faces/signup/continue.xhtml/?sessionID="+sessionID+"\">clic aquí</a> o ingresa a este link: http://localhost:8080/PelubosqueCaratulas/faces/signup/continue.xhtml?sessionID="+sessionID+"</p><br>\n"
+						+ "        <p>En nombre del equipo de Pelubosque te damos la mas cordial bienvenida al servicio mas grande de diseÃ±o de imagen del pais. <br>\n"
+						+ "        Haz <a href=\"http://localhost:8080/PelubosqueCaratulas/faces/signup/continue.xhtml/?sessionID="+sessionID+"\">clic aquÃ­</a> o ingresa a este link: http://localhost:8080/PelubosqueCaratulas/faces/signup/continue.xhtml?sessionID="+sessionID+"</p><br>\n"
 						+ "        <p>Recuerda que no hay personas feas, sino mal arregladas.</p> <br>\n"
 						+ "        <p>Quedamos atentos,</p><br>\n"
-						+ "        <p>El equipo de Pelubosque y Carátulas</p>\n"
+						+ "        <p>El equipo de Pelubosque y CarÃ¡tulas</p>\n"
 						+ "    </body>\n"
 						+ "</html>");
 			}
@@ -454,7 +454,7 @@ public class User {
 					+ "        <p>Queremos informarte que activaste tu cuenta exitosamente y a partir de este momento ya puedes utilizar nuestros servicios.</p> <br>\n"
 					+ "        <p>Cualquier inconformidad puedes contactar a gblancol@unbosque.edu.co</p><br>\n"
 					+ "        <p>Quedamos atentos,</p><br>\n"
-					+ "        <p>El equipo de Pelubosque y Carátulas</p>\n"
+					+ "        <p>El equipo de Pelubosque y CarÃ¡tulas</p>\n"
 					+ "    </body>\n"
 					+ "</html>");
 			context.getExternalContext().redirect("../Aplicacion/index.xhtml?sessionID="+users.get(0).getSessionID());
@@ -494,7 +494,7 @@ public class User {
 					+ "        <p>En un momento verificaremos tu solicitud y pondremos las funciones correspondientes.</p><br>\n"
 					+ "        <p>Cualquier inconformidad puedes contactar a gblancol@unbosque.edu.co</p><br>\n"
 					+ "        <p>Quedamos atentos,</p><br>\n"
-					+ "        <p>El equipo de Pelubosque y Carátulas</p>\n"
+					+ "        <p>El equipo de Pelubosque y CarÃ¡tulas</p>\n"
 					+ "    </body>\n"
 					+ "</html>");
 			context.getExternalContext().redirect("../Aplicacion/index.xhtml?sessionID="+users.get(0).getSessionID());
@@ -570,10 +570,10 @@ public class User {
 					+ "    </head>\n"
 					+ "    <body>\n"
 					+ "        <h1>Hola "+users.get(0).getName()+"</h1><br>\n"
-					+ "        <p>Queremos informarte que desactivaste tu cuenta exitosamente. Por políticas internas no podemos eliminar los servicios que has utilizado. Ya que la Ley 1582 de 2012 ampara a ti y a nosotros, solo usaremos tus datos para los servicios utilizados anteriormente.</p> <br>\n"
+					+ "        <p>Queremos informarte que desactivaste tu cuenta exitosamente. Por polÃ­ticas internas no podemos eliminar los servicios que has utilizado. Ya que la Ley 1582 de 2012 ampara a ti y a nosotros, solo usaremos tus datos para los servicios utilizados anteriormente.</p> <br>\n"
 					+ "        <p>Cualquier inconformidad puedes contactar a gblancol@unbosque.edu.co</p><br>\n"
 					+ "        <p>Quedamos atentos,</p><br>\n"
-					+ "        <p>El equipo de Pelubosque y Carátulas</p>\n"
+					+ "        <p>El equipo de Pelubosque y CarÃ¡tulas</p>\n"
 					+ "    </body>\n"
 					+ "</html>");
 		} catch (IOException | MessagingException e) {
@@ -636,7 +636,7 @@ public class User {
 						+ "        <p>Queremos informarte que desactivaste tu tarjeta "+newcc.getFranchise()+" "+newNumber+" ha sido registrada exitosamente.</p> <br>\n"
 						+ "        <p>Cualquier inconformidad puedes contactar a gblancol@unbosque.edu.co</p><br>\n"
 						+ "        <p>Quedamos atentos,</p><br>\n"
-						+ "        <p>El equipo de Pelubosque y Carátulas</p>\n"
+						+ "        <p>El equipo de Pelubosque y CarÃ¡tulas</p>\n"
 						+ "    </body>\n"
 						+ "</html>");
 			} catch (MessagingException e) {
@@ -663,7 +663,7 @@ public class User {
 						+ "        <p>Queremos informarte que desactivaste tu tarjeta "+newcc.getFranchise()+" "+newNumber+" ha sido registrada exitosamente.</p> <br>\n"
 						+ "        <p>Cualquier inconformidad puedes contactar a gblancol@unbosque.edu.co</p><br>\n"
 						+ "        <p>Quedamos atentos,</p><br>\n"
-						+ "        <p>El equipo de Pelubosque y Carátulas</p>\n"
+						+ "        <p>El equipo de Pelubosque y CarÃ¡tulas</p>\n"
 						+ "    </body>\n"
 						+ "</html>");
 			} catch (MessagingException e) {
@@ -694,7 +694,7 @@ public class User {
 						+ "        <p>Queremos informarte que desactivaste tu tarjeta "+newcc.getFranchise()+" "+newNumber+" ha sido registrada exitosamente.</p> <br>\n"
 						+ "        <p>Cualquier inconformidad puedes contactar a gblancol@unbosque.edu.co</p><br>\n"
 						+ "        <p>Quedamos atentos,</p><br>\n"
-						+ "        <p>El equipo de Pelubosque y Carátulas</p>\n"
+						+ "        <p>El equipo de Pelubosque y CarÃ¡tulas</p>\n"
 						+ "    </body>\n"
 						+ "</html>");
 			} catch (MessagingException e) {
@@ -703,7 +703,7 @@ public class User {
 			}
 			
 		} else {
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","La tarjeta no es válida");
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","La tarjeta no es vÃ¡lida");
 			FacesContext.getCurrentInstance().addMessage("badLogin", message);
 		}
 		try {
@@ -797,7 +797,7 @@ public class User {
 			session.update(users.get(0));
 			
 		} else {
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","La tarjeta no es válida");
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","La tarjeta no es vÃ¡lida");
 			FacesContext.getCurrentInstance().addMessage("badLogin", message);
 		}
 		var newFranchise = "";
@@ -819,7 +819,7 @@ public class User {
 					+ "        <p>Queremos informarte que desactivaste tu tarjeta "+newFranchise+" "+newCardNumber+" ha sido registrada exitosamente.</p> <br>\n"
 					+ "        <p>Cualquier inconformidad puedes contactar a gblancol@unbosque.edu.co</p><br>\n"
 					+ "        <p>Quedamos atentos,</p><br>\n"
-					+ "        <p>El equipo de Pelubosque y Carátulas</p>\n"
+					+ "        <p>El equipo de Pelubosque y CarÃ¡tulas</p>\n"
 					+ "    </body>\n"
 					+ "</html>");
 			

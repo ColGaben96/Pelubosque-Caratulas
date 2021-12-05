@@ -4,11 +4,11 @@
 	<session-factory>
 		<!-- JDBC Database connection settings -->
 		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-		<property name="connection.url">jdbc:mysql://remotemysql.com:3306/ImmnUr2vPP</property>
-		<property name="connection.username">ImmnUr2vPP</property>
-		<property name="connection.password">MLSgcm7woJ</property>
+		<property name="connection.url">jdbc:mysql://pelubosque.mysql.database.azure.com:3306/pelubosquedb</property>
+		<property name="connection.username">gblanco</property>
+		<property name="connection.password">123456aB!</property>
 		<!-- Select our SQL dialect -->
-		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
 		<!-- Echo the SQL to stdout -->
 		<property name="show_sql">true</property>
 		<!-- Set the current session context -->
