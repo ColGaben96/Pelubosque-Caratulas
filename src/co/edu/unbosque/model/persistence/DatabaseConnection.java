@@ -24,9 +24,9 @@ public class DatabaseConnection {
 		var msg = new ArrayList<String>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String user = "ImmnUr2vPP";
-			String pass = "MLSgcm7woJ";
-			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			String user = "gblanco";
+			String pass = "123456aB!";
+			con = DriverManager.getConnection("jdbc:mysql://pelubosque.mysql.database.azure.com:3306/pelubosquedb", user, pass);
 			statement = con.createStatement();
 			rs = statement.executeQuery("SELECT * FROM IDS");
 			while(rs.next()) {
@@ -43,9 +43,9 @@ public class DatabaseConnection {
 		var msg = new ArrayList<String>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String user = "ImmnUr2vPP";
-			String pass = "MLSgcm7woJ";
-			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			String user = "gblanco";
+			String pass = "123456aB!";
+			con = DriverManager.getConnection("jdbc:mysql://pelubosque.mysql.database.azure.com:3306/pelubosquedb", user, pass);
 			statement = con.createStatement();
 			rs = statement.executeQuery("SELECT * FROM Genres");
 			while(rs.next()) {
@@ -63,9 +63,9 @@ public class DatabaseConnection {
 		var msg = new ArrayList<User>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String user = "ImmnUr2vPP";
-			String pass = "MLSgcm7woJ";
-			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			String user = "gblanco";
+			String pass = "123456aB!";
+			con = DriverManager.getConnection("jdbc:mysql://pelubosque.mysql.database.azure.com:3306/pelubosquedb", user, pass);
 			statement = con.createStatement();
 			rs = statement.executeQuery("SELECT * FROM User");
 			while(rs.next()) {
@@ -82,9 +82,9 @@ public class DatabaseConnection {
 		var msg = new ArrayList<String>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String user = "ImmnUr2vPP";
-			String pass = "MLSgcm7woJ";
-			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			String user = "gblanco";
+			String pass = "123456aB!";
+			con = DriverManager.getConnection("jdbc:mysql://pelubosque.mysql.database.azure.com:3306/pelubosquedb", user, pass);
 			statement = con.createStatement();
 			rs = statement.executeQuery("SELECT * FROM User");
 			while(rs.next()) {
@@ -101,9 +101,9 @@ public class DatabaseConnection {
 		var msg = new ArrayList<Locations>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String user = "ImmnUr2vPP";
-			String pass = "MLSgcm7woJ";
-			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			String user = "gblanco";
+			String pass = "123456aB!";
+			con = DriverManager.getConnection("jdbc:mysql://pelubosque.mysql.database.azure.com:3306/pelubosquedb", user, pass);
 			statement = con.createStatement();
 			rs = statement.executeQuery("SELECT * FROM Location");
 			while(rs.next()) {
@@ -120,9 +120,9 @@ public class DatabaseConnection {
 		var msg = new ArrayList<String>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String user = "ImmnUr2vPP";
-			String pass = "MLSgcm7woJ";
-			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			String user = "gblanco";
+			String pass = "123456aB!";
+			con = DriverManager.getConnection("jdbc:mysql://pelubosque.mysql.database.azure.com:3306/pelubosquedb", user, pass);
 			statement = con.createStatement();
 			rs = statement.executeQuery("SELECT * FROM Location");
 			while(rs.next()) {
@@ -139,9 +139,9 @@ public class DatabaseConnection {
 		var msg = new ArrayList<String>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String user = "ImmnUr2vPP";
-			String pass = "MLSgcm7woJ";
-			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			String user = "gblanco";
+			String pass = "123456aB!";
+			con = DriverManager.getConnection("jdbc:mysql://pelubosque.mysql.database.azure.com:3306/pelubosquedb", user, pass);
 			statement = con.createStatement();
 			rs = statement.executeQuery("SELECT * FROM `divipolaState` ORDER BY name ASC");
 			while(rs.next()) {
@@ -158,9 +158,9 @@ public class DatabaseConnection {
 		var msg = new ArrayList<String>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String user = "ImmnUr2vPP";
-			String pass = "MLSgcm7woJ";
-			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			String user = "gblanco";
+			String pass = "123456aB!";
+			con = DriverManager.getConnection("jdbc:mysql://pelubosque.mysql.database.azure.com:3306/pelubosquedb", user, pass);
 			statement = con.createStatement();
 			rs = statement.executeQuery("SELECT * FROM `divipolaTown` ORDER BY name ASC");
 			while(rs.next()) {
@@ -177,9 +177,9 @@ public class DatabaseConnection {
 		var msg = new ArrayList<String>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String user = "ImmnUr2vPP";
-			String pass = "MLSgcm7woJ";
-			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			String user = "gblanco";
+			String pass = "123456aB!";
+			con = DriverManager.getConnection("jdbc:mysql://pelubosque.mysql.database.azure.com:3306/pelubosquedb", user, pass);
 			statement = con.createStatement();
 			rs = statement.executeQuery("SELECT * FROM divipolaTown");
 			while(rs.next()) {
@@ -196,9 +196,9 @@ public class DatabaseConnection {
 		var msg = new ArrayList<String>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String user = "ImmnUr2vPP";
-			String pass = "MLSgcm7woJ";
-			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			String user = "gblanco";
+			String pass = "123456aB!";
+			con = DriverManager.getConnection("jdbc:mysql://pelubosque.mysql.database.azure.com:3306/pelubosquedb", user, pass);
 			statement = con.createStatement();
 			rs = statement.executeQuery("SELECT * FROM `divipolaTown` WHERE state = '"+state+"'");
 			while(rs.next()) {
@@ -215,9 +215,9 @@ public class DatabaseConnection {
 		var msg = new ArrayList<CreditCard>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String user = "ImmnUr2vPP";
-			String pass = "MLSgcm7woJ";
-			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			String user = "gblanco";
+			String pass = "123456aB!";
+			con = DriverManager.getConnection("jdbc:mysql://pelubosque.mysql.database.azure.com:3306/pelubosquedb", user, pass);
 			statement = con.createStatement();
 			rs = statement.executeQuery("SELECT * FROM `Users` WHERE state = '"+sessionID+"'");
 			while(rs.next()) {
@@ -234,9 +234,9 @@ public class DatabaseConnection {
 		var msg = new ArrayList<Appointments>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String user = "ImmnUr2vPP";
-			String pass = "MLSgcm7woJ";
-			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			String user = "gblanco";
+			String pass = "123456aB!";
+			con = DriverManager.getConnection("jdbc:mysql://pelubosque.mysql.database.azure.com:3306/pelubosquedb", user, pass);
 			statement = con.createStatement();
 			rs = statement.executeQuery("SELECT * FROM `Users` WHERE state = '"+sessionID+"'");
 			while(rs.next()) {
@@ -253,9 +253,9 @@ public class DatabaseConnection {
 		var msg = new ArrayList<User>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String user = "ImmnUr2vPP";
-			String pass = "MLSgcm7woJ";
-			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			String user = "gblanco";
+			String pass = "123456aB!";
+			con = DriverManager.getConnection("jdbc:mysql://pelubosque.mysql.database.azure.com:3306/pelubosquedb", user, pass);
 			statement = con.createStatement();
 			rs = statement.executeQuery("SELECT * FROM `Users`");
 			while(rs.next()) {
@@ -272,9 +272,9 @@ public class DatabaseConnection {
 	public void updateUserAddress(User userobj, String address) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			String user = "ImmnUr2vPP";
-			String pass = "MLSgcm7woJ";
-			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			String user = "gblanco";
+			String pass = "123456aB!";
+			con = DriverManager.getConnection("jdbc:mysql://pelubosque.mysql.database.azure.com:3306/pelubosquedb", user, pass);
 			statement = con.createStatement();
 			int result = statement.executeUpdate("UPDATE `Users` SET"
 					+ "`username`='"+userobj.getUsername()+"',"
